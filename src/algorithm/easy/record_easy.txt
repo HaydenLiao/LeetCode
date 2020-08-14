@@ -1,0 +1,2 @@
+1.Question1, twoSum
+2.Question7, reverse
