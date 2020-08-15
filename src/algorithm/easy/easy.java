@@ -7,7 +7,7 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-        String s= "{{}}";
+        String s= "{{()}}";
         System.out.println(t.isValid(s));
 
     }
@@ -15,62 +15,62 @@ public class easy {
 
 
 //Question 20---------------------------------------------
-//public boolean isValid(String s) {
-//    /**
-//     * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
-//     * 注意空字符串可被认为是有效字符串。
-//     * 最好使用hashmap进行配对，不然对于多对匹配情况会非常麻烦
-//     * 时间复杂度O(n)
-//     * 空间复杂度O(n)
-//     *
-//     */
-//    if(s.length()<1) return true;
-//    boolean ret=false;
-//    HashMap<Character,Character> pair=new HashMap<>(){{
-//        put('(',')');
-//        put('{','}');
-//        put('[',']');
-//    }};
-//    Stack<Character> temp= new Stack();
-//    for(int i=0;i<s.length();i++){
-//        char c=s.charAt(i);
-//        if(pair.containsKey(c)){
-//            temp.push(pair.get(c));
-//        }
-//        else if(!pair.containsKey(c)||c!=temp.pop()){
-//            return false;
-//        }
-//        else if(c==temp.pop())
-//            temp.pop();
-//    }
-//    return temp.empty();
-//}
     public boolean isValid(String s) {
-        /**
-         * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
-         * 注意空字符串可被认为是有效字符串。
-         *
-         * 时间复杂度O(n)
-         * 空间复杂度O(n)
-         *
-         */
-        if(s.length()<1) return true;
-        boolean ret=false;
-        Stack<Character> temp= new Stack();
-        for(int i=0;i<s.length();i++){
-            char c=s.charAt(i);
-            if(c=='('||c=='{'||c=='['){
-                temp.push(s.charAt(i));
-            }
-            else if(!temp.empty()&&((c==')'&&temp.peek()=='(')||(c=='}'&&temp.peek()=='{')||(c==']'&&temp.peek()=='['))){
-                temp.pop();
-            }
-            else
-                return ret;
+    /**
+     * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+     * 注意空字符串可被认为是有效字符串。
+     * 最好使用hashmap进行配对，不然对于多对匹配情况会非常麻烦
+     * 时间复杂度O(n)
+     * 空间复杂度O(n)
+     *
+     */
+    if(s.length()<1) return true;
+    boolean ret=false;
+    HashMap<Character,Character> pair=new HashMap<>(){{
+        put('(',')');
+        put('{','}');
+        put('[',']');
+    }};
+    Stack<Character> temp= new Stack();
+    for(int i=0;i<s.length();i++){
+        char c=s.charAt(i);
+        if(pair.containsKey(c)){
+            temp.push(pair.get(c));
         }
-        if(temp.empty()) ret=true;
-        return ret;
+        else if(!temp.empty()&&pair.containsValue(c)&&c==temp.peek()){
+            temp.pop();
+        }
+        else
+            return false;
     }
+    return temp.empty();
+    }
+//    public boolean isValid(String s) {
+//        /**
+//         * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+//         * 注意空字符串可被认为是有效字符串。
+//         *
+//         * 时间复杂度O(n)
+//         * 空间复杂度O(n)
+//         *
+//         */
+//        if(s.length()<1) return true;
+//        boolean ret=false;
+//        Stack<Character> temp= new Stack();
+//        for(int i=0;i<s.length();i++){
+//            char c=s.charAt(i);
+//            if(c=='('||c=='{'||c=='['){
+//                temp.push(s.charAt(i));
+//            }
+//            else if(!temp.empty()&&((c==')'&&temp.peek()=='(')||(c=='}'&&temp.peek()=='{')||(c==']'&&temp.peek()=='['))){
+//                temp.pop();
+//            }
+//            else
+//                return ret;
+//        }
+//        if(temp.empty()) ret=true;
+//        return ret;
+//    }
 
 
 
