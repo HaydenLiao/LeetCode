@@ -6,16 +6,40 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-//        int[] tw=new int[]{2,3};
-//        int[] ret=t.twoSum(new int[]{3,2,4}, 6);
-//        for(int c: ret){
-//            System.out.println(c);
-//        }
-        System.out.println(t.reverse(-325));
-//        String s="assfefge";
-//        System.out.println(s.substring(0,3));
+
+        System.out.println(t.isPalindrome(11));
 
     }
+
+
+//Question 9----------------------------------------------
+    public boolean isPalindrome(int x) {
+        /**
+         * Question 9
+         * 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+         *
+         * 时间复杂度O(log10(x))
+         * 空间复杂度O(1)
+         */
+        if(x<0 || (x%10==0)&&x!=0) return false;//x以0结尾必false
+        int rev=0;
+        int pop=0;
+        while(x>rev){
+            pop=x%10;
+            rev=rev*10+pop;
+            x=x/10;
+        }
+        if(rev==x || rev/10==x) return true;
+        return false;
+        /*反转整个数字
+        easy t=new easy();
+        if(x<0) return false;
+        if(x==t.reverse(x)) return true;
+        return false;
+         */
+    }
+
+
 
 //Question 7------------------------------------------------
     public int reverse(int x) {
@@ -49,9 +73,8 @@ public class easy {
 //Question 1------------------------------------------------------
     public int[] twoSum(int[] nums, int target){
         /**
-         *
          * Question 1
-         *
+         *给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
          * 一遍hashmap，时间复杂度为O（n）
          *
          * 下面有暴力法，时间复杂度为O（n^2)
