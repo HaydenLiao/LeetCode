@@ -7,12 +7,36 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-        String s= "{{()}}";
-        System.out.println(t.isValid(s));
+        String[] s= new String[]{};
+        System.out.println(t.longestCommonPrefix(s));
 
     }
 
-
+//Question 14---------------------------------------------
+    public String longestCommonPrefix(String[] strs) {
+        /**
+         * 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 "".
+         * 此题注意字符串比较用.equals（）
+         * 时间复杂度O(nm)
+         * 空间复杂度O(1)
+         */
+        String ret="";
+        if(strs.length<1) return ret;
+        String first=strs[0];
+        String temp="";
+        fi:for(int i=1;i<strs[0].length()+1;i++){
+            temp=strs[0].substring(0,i);
+            for(int j=1;j<strs.length;j++){
+                if(i>strs[j].length()||!strs[j].substring(0,i).equals(temp)){
+                    break fi;
+                }
+                else
+                    continue ;
+            }
+            ret=temp;
+        }
+        return ret;
+    }
 
 //Question 20---------------------------------------------
     public boolean isValid(String s) {
