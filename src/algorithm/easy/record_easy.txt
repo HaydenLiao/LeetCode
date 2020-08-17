@@ -9,3 +9,5 @@
 5.Question14, longestCommonPrefix, subString+String.equals(), 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 "".
 
 6.Question26, removeDuplicates, 双指针, 删除排序数组中的重复项, 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度
+
+7.Question28, strStr, 双指针, 实现 strStr(), 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。

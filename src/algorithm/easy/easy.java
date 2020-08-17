@@ -8,31 +8,52 @@ public class easy {
 
         easy t=new easy();
         int[] s= new int[]{0,0,1,1,1,2,2,3,3,4};
-        System.out.println(t.removeDuplicates(s));
+        String haystack = "hh";
+        String needle = "hhh";
+        System.out.println(t.strStr(haystack,needle));
 
     }
 
 
+//Question 28---------------------------------------------
+    public int strStr(String haystack, String needle) {
+        /**
+         * 实现 strStr() 函数。
+         * 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+         *
+         * 时间复杂度O(n)
+         * 空间复杂度O(1)
+         */
+        if(needle.length()<1) return 0;
+        if(haystack.length()<1) return -1;
+        int needle_len=needle.length();
+        for(int i=0;i<haystack.length()+1-needle_len;i++){
+            if((haystack.charAt(i)==needle.charAt(0))&&haystack.substring(i,i+needle_len).equals(needle)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
 //Question 26---------------------------------------------
-public int removeDuplicates(int[] nums) {
-    /**
-     * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
-     * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
-     * 时间复杂度O(n)
-     * 空间复杂度O(1)
-     * 双指针，自己的写法用了三指针，因为i++之后指向的是新的未重复元素，可省略insert这一指针
-     */
-    if(nums.length<2) return nums.length;
-    int i=0;
-    for(int j=1;j<nums.length;j++){
-        if(nums[i]!=nums[j]){
-            i++;
-            nums[i]=nums[j];
+    public int removeDuplicates(int[] nums) {
+        /**
+         * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+         * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+         * 时间复杂度O(n)
+         * 空间复杂度O(1)
+         * 双指针，自己的写法用了三指针，因为i++之后指向的是新的未重复元素，可省略insert这一指针
+         */
+        if(nums.length<2) return nums.length;
+        int i=0;
+        for(int j=1;j<nums.length;j++){
+            if(nums[i]!=nums[j]){
+                i++;
+                nums[i]=nums[j];
+            }
         }
+        return i+1;
     }
-    return i+1;
-}
 //    public int removeDuplicates(int[] nums) {
 //        /**
 //         * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。

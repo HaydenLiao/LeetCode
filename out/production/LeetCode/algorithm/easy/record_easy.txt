@@ -7,3 +7,5 @@
 4.Question20, isValid, stack+hashmap, 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
 
 5.Question14, longestCommonPrefix, subString+String.equals(), 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 "".
+
+6.Question26, removeDuplicates, 双指针, 删除排序数组中的重复项, 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度
