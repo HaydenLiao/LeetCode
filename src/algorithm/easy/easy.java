@@ -7,7 +7,7 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-        int[] s= new int[]{};
+        int[] s= new int[]{0,0,1,1,1,2,2,3,3,4};
         System.out.println(t.removeDuplicates(s));
 
     }
@@ -15,32 +15,50 @@ public class easy {
 
 
 //Question 26---------------------------------------------
-    public int removeDuplicates(int[] nums) {
-        /**
-         * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
-         * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
-         * 时间复杂度O(n)
-         * 空间复杂度O(1)
-         */
-        if(nums.length<2) return nums.length;
-        int tag1=0;
-        int tag2=1;
-        int insert=0;
-        while(tag2<nums.length){
-            if(nums[tag1]==nums[tag2]){
-                tag1=tag2;
-                tag2++;
-            }
-            else{
-                insert++;
-                nums[insert]=nums[tag2];
-                tag1=tag2;
-                tag2++;
-
-            }
+public int removeDuplicates(int[] nums) {
+    /**
+     * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+     * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+     * 时间复杂度O(n)
+     * 空间复杂度O(1)
+     * 双指针，自己的写法用了三指针，因为i++之后指向的是新的未重复元素，可省略insert这一指针
+     */
+    if(nums.length<2) return nums.length;
+    int i=0;
+    for(int j=1;j<nums.length;j++){
+        if(nums[i]!=nums[j]){
+            i++;
+            nums[i]=nums[j];
         }
-        return insert+1;
     }
+    return i+1;
+}
+//    public int removeDuplicates(int[] nums) {
+//        /**
+//         * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+//         * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+//         * 时间复杂度O(n)
+//         * 空间复杂度O(1)
+//         */
+//        if(nums.length<2) return nums.length;
+//        int tag1=0;
+//        int tag2=1;
+//        int insert=0;
+//        while(tag2<nums.length){
+//            if(nums[tag1]==nums[tag2]){
+//                tag1=tag2;
+//                tag2++;
+//            }
+//            else{
+//                insert++;
+//                nums[insert]=nums[tag2];
+//                tag1=tag2;
+//                tag2++;
+//
+//            }
+//        }
+//        return insert+1;
+//    }
 
 
 //Question 14---------------------------------------------
