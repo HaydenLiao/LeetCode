@@ -7,13 +7,32 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-        int[] s= new int[]{0,0,1,1,1,2,2,3,3,4};
+        int[] s= new int[]{};
+        int target=7;
         String haystack = "hh";
         String needle = "hhh";
-        System.out.println(t.strStr(haystack,needle));
+        System.out.println(t.searchInsert(s,target));
 
     }
 
+//Question 35---------------------------------------------
+    public int searchInsert(int[] nums, int target) {
+        /**
+         * 搜索插入位置
+         * 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+         * 时间复杂度O(n)
+         * 空间复杂度O(1)
+         */
+        if(nums.length<1){
+            return 0;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(target<nums[i]||target==nums[i]){
+                return i;
+            }
+        }
+        return nums.length;
+    }
 
 //Question 28---------------------------------------------
     public int strStr(String haystack, String needle) {
