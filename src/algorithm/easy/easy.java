@@ -7,13 +7,56 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-        int[] s= new int[]{1,2,2,2,2};
-        int target=7;
+        int[] s= new int[]{1,2,2,2};
+        int target=2;
         String haystack = "hh";
         String needle = "hhh";
-        System.out.println(t.searchInsert(s,target));
+        System.out.println(t.removeElement(s,target));
 
     }
+
+
+
+//Question 27--------------------------------------------
+    public int removeElement(int[] nums, int val) {
+        /**
+         * 27. 移除元素
+         * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+         * 时间复杂度O(n)
+         * 空间复杂度O(1)
+         */
+        int i=0;
+        for(int j=0;j<nums.length;j++){
+            if(nums[j]!=val){
+                nums[i]=nums[j];
+                i++;
+            }
+        }
+        return i;
+    }
+
+//    public int removeElement(int[] nums, int val) {
+//        /**
+//         * 27. 移除元素
+//         * 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+//         * 时间复杂度O(n)
+//         * 空间复杂度O(1)
+//         */
+//        int i=0;
+//        int n=nums.length-1;
+//        while(i<=n){
+//            if(nums[i]==val){
+//                nums[i]=nums[n];
+//                n--;
+//            }
+//            else
+//                i++;
+//
+//        }
+//        return i;
+//    }
+
+
 
 //Question 35---------------------------------------------
     public int searchInsert(int[] nums, int target) {
