@@ -11,11 +11,79 @@ public class easy {
         int target=2;
         String haystack = "hh";
         String needle = "hhh";
-        System.out.println(t.removeElement(s,target));
+        System.out.println(t.countAndSay(5));
 
     }
 
+//Question 38--------------------------------------------
+    public String countAndSay(int n) {
+        /**
+         *38. 外观数列
+         * 给定一个正整数 n（1 ≤ n ≤ 30），输出外观数列的第 n 项。
+         * 使用递归
+         * 时间复杂度O(n^2)
+         * 空间复杂度O(1)
+         */
+        String s="1";
+        if(n==1) return s;
+        while (n>1){
+            s=countAndSay(n-1);
+            String ini="";
+            int count=1;
+            int j=0;
+            for(int i=1;i<s.length();i++){
+                if(s.charAt(i)==s.charAt(j)){
+                    count++;
+                }
+                else{
 
+                    ini=ini+count+s.charAt(j);
+                    j=i;
+                    count=1;
+                }
+            }
+            ini=ini+count+s.charAt(s.length()-1);
+            return ini;
+
+        }
+        return s;
+    }
+
+//    public String countAndSay(int n) {
+//        /**
+//         * 38. 外观数列
+//         * 给定一个正整数 n（1 ≤ n ≤ 30），输出外观数列的第 n 项。
+//         * 使用helper
+//         * 时间复杂度O(n^2)
+//         * 空间复杂度O(1)
+//         */
+//        String ret="1";
+//        if(n==1) return ret;
+//        while (n>1){
+//            ret=countAndSay_helper(ret);
+//            n--;
+//        }
+//        return ret;
+//    }
+//
+//    public String countAndSay_helper(String s){
+//        String ret="";
+//        int count=1;
+//        int j=0;
+//        for(int i=1;i<s.length();i++){
+//            if(s.charAt(i)==s.charAt(j)){
+//                count++;
+//            }
+//            else{
+//
+//                ret=ret+count+s.charAt(j);
+//                j=i;
+//                count=1;
+//            }
+//        }
+//        ret=ret+count+s.charAt(s.length()-1);
+//        return ret;
+//    }
 
 //Question 27--------------------------------------------
     public int removeElement(int[] nums, int val) {
