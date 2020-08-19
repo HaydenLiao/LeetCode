@@ -7,12 +7,36 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-        int[] s= new int[]{1,2,2,2};
+        int[] s= new int[]{1,-2,-2,2,2};
         int target=2;
         String haystack = "hh";
         String needle = "hhh";
-        System.out.println(t.countAndSay(5));
+        System.out.println(t.maxSubArray(s));
 
+    }
+
+
+    /**
+     * 53. 最大子序和
+     * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     * @param nums
+     * @return int
+     */
+    public int maxSubArray(int[] nums) {
+        /**
+         * 动态规划，按正序很难求，但是可以反向想，以nums[i]结尾的最大子序和必定为max{nums[i],nums[i]+f(i-1)
+         *
+         */
+        int[] dp=new int[nums.length];
+        dp[0]=nums[0];
+        int ret=dp[0];
+        for(int i=1;i<nums.length;i++){
+            dp[i]=Math.max(nums[i],nums[i]+dp[i-1]);
+        }
+        for(int i=1;i<dp.length;i++){
+            ret=Math.max(ret,dp[i]);
+        }
+        return ret;
     }
 
 //Question 38--------------------------------------------
