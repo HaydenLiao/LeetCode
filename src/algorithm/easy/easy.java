@@ -9,24 +9,52 @@ public class easy {
         easy t=new easy();
         int[] s= new int[]{1,-2,-2,2,2};
         int target=2;
-        String haystack = "hh";
+        String haystack = "      ";
         String needle = "hhh";
-        System.out.println(t.maxSubArray(s));
+        System.out.println(t.lengthOfLastWord(haystack));
 
     }
 
 
     /**
+     * 58. 最后一个单词的长度
+     给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。
+     如果不存在最后一个单词，请返回 0 。
+     * @param s
+     * @return int
+     */
+    public int lengthOfLastWord(String s) {
+        //从左向右遍历（可用从右向左遍历，更省时间）
+        //时间复杂度O(n),空间复杂度O(1)
+        int loc=0;
+        int len=0;
+        if(s.length()<1) return len;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==' '){
+                loc=i+1;
+            }
+            else{
+                len=i-loc+1;
+            }
+        }
+        return len;
+    }
+
+
+
+
+
+    /**
      * 53. 最大子序和
      * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     * 未包括分治法
      * @param nums
      * @return int
      */
     public int maxSubArray(int[] nums) {
-        /**
-         * 动态规划，按正序很难求，但是可以反向想，以nums[i]结尾的最大子序和必定为max{nums[i],nums[i]+f(i-1)
-         *
-         */
+        // 动态规划，按正序很难求，但是可以反向想，以nums[i]结尾的最大子序和必定为max{nums[i],nums[i]+f(i-1)
+        //时间复杂度O(n)
+        //空间复杂度O(n)
         int[] dp=new int[nums.length];
         dp[0]=nums[0];
         int ret=dp[0];
@@ -38,6 +66,16 @@ public class easy {
         }
         return ret;
     }
+
+//    public int maxSubArray(int[] nums) {
+//        /**
+//         * 分治法
+//         */
+//        return 0;
+//    }
+
+
+
 
 //Question 38--------------------------------------------
     public String countAndSay(int n) {

@@ -1,21 +1,25 @@
 序号，题号，函数名，所用方法，题名，题目描述
 
-1.Question1, twoSum, hashmap, 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+1.Question1, twoSum, hashmap,
 
-2.Question7, reverse, 伪stack, 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+2.Question7, reverse, 伪stack,
 
-3.Question9, isPalindrome, 伪stack, 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+3.Question9, isPalindrome, 伪stack,
 
-4.Question14, longestCommonPrefix, subString+String.equals(), 编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 "".
+4.Question14, longestCommonPrefix, subString+String.equals(),
 
-5.Question20, isValid, stack+hashmap, 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+5.Question20, isValid, stack+hashmap,
 
-6.Question26, removeDuplicates, 双指针, 删除排序数组中的重复项, 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度
+6.Question26, removeDuplicates, 双指针,
 
-7.Question27, removeEleme, 双指针, 移除元素, 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。
+7.Question27, removeEleme, 双指针, 移除元素,
 
-8.Question28, strStr, 双指针, 实现 strStr(), 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+8.Question28, strStr, 双指针, 实现 strStr(),
 
-9.Question35, searchInsert, 二分法, 搜索插入位置, 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。
+9.Question35, searchInsert, 二分法, 搜索插入位置, 
 
-10.Question38, countAndSay, 递归, 外观数列， 给定一个正整数 n（1 ≤ n ≤ 30），输出外观数列的第 n 项。
+10.Question38, countAndSay, 递归, 外观数列，
+
+TBC  11.Question53, maxSubArray, 动态规划+分治法（尚未实现）, 最大子序和，
+
+12.Question58, lengthOfLastWord, 遍历, 最后一个单词的长度，
