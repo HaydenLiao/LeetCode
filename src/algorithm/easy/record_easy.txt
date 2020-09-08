@@ -2,24 +2,34 @@
 
 1.Question1, twoSum, hashmap,
 
+2.Question2, addTwoNumbers, linked-list 链表, 两数相加
+
 2.Question7, reverse, 伪stack,
 
 3.Question9, isPalindrome, 伪stack,
 
-4.Question14, longestCommonPrefix, subString+String.equals(),
+4.Question14, longestCommonPrefix, subString+String.equals().
 
 5.Question20, isValid, stack+hashmap,
 
 6.Question26, removeDuplicates, 双指针,
 
-7.Question27, removeEleme, 双指针, 移除元素,
+7.Question27, removeEleme, 双指针, 移除元素.
 
-8.Question28, strStr, 双指针, 实现 strStr(),
+8.Question28, strStr, 双指针, 实现 strStr().
 
-9.Question35, searchInsert, 二分法, 搜索插入位置, 
+9.Question35, searchInsert, 二分法, 搜索插入位置.
 
-10.Question38, countAndSay, 递归, 外观数列，
+10.Question38, countAndSay, 递归, 外观数列.
 
-TBC  11.Question53, maxSubArray, 动态规划+分治法（尚未实现）, 最大子序和，
+TBC  11.Question53, maxSubArray, 动态规划+分治法（尚未实现）, 最大子序和.
 
-12.Question58, lengthOfLastWord, 遍历, 最后一个单词的长度，
+12.Question58, lengthOfLastWord, 遍历, 最后一个单词的长度.
+
+TBC 13.Question69, mySqrt, ---------, 实现 int sqrt(int x) 函数.
+
+TBC 14.Question70, climbStairs, 动态规划, 爬楼梯.
+
+
+
+

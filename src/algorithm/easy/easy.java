@@ -1,7 +1,17 @@
 package algorithm.easy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
+
+
+//single-linked list
+class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) { val = x; }
+  }
+
 
 public class easy {
     public static void main(String[] args){
@@ -11,10 +21,121 @@ public class easy {
         int target=2;
         String haystack = "      ";
         String needle = "hhh";
-        System.out.println(t.lengthOfLastWord(haystack));
+
+        System.out.println();
 
     }
 
+
+    /**
+     * 辅助打印链表,与2.两数相加一起使用
+     * @param listNode
+     * @return
+     */
+    public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        ListNode temp = listNode;
+        while(temp != null){
+            a.add(new Integer(temp.val));
+            temp = temp.next;
+        }
+        Integer b ;
+        for(int i=0; i<a.size()/2;i++){
+            b = a.get(i);
+            a.set(i, a.get(a.size()-i-1));
+            a.set(a.size()-i-1,b);
+        }
+        return a;
+    }
+
+    /**
+     * 2. 两数相加
+     * 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+     * 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+     * 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+     * @param l1
+     * @param l2
+     * @return linked-list
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        //测试用例
+        /**ListNode l1=new ListNode(9);
+         ListNode l2=new ListNode(8);
+         ListNode p=t.addTwoNumbers(l1,l2);
+         System.out.println(t.printListFromTailToHead(p));
+         */
+        //时间复杂度O(max(m,n)),空间复杂度O(max(m,n))
+        ListNode dummyHead = new ListNode(0);
+        ListNode cur=dummyHead;
+        int carry=0;          //carry:进位
+        while(l1!=null||l2!=null){
+            int p=l1!=null? l1.val : 0;//三元表达式
+            int q=l2!=null? l2.val : 0;
+            int sum=p+q+carry;
+            cur.next=new ListNode(sum%10);
+            carry=sum/10;
+            cur=cur.next;
+            if(l1!=null) l1=l1.next;
+            if(l2!=null) l2=l2.next;
+        }
+        if(carry>0){
+            cur.next=new ListNode(carry);
+        }
+        return dummyHead.next;
+    }
+
+
+
+
+    /**
+     * 70. 爬楼梯
+     * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+     * 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？
+     * @param n
+     * @return int
+     */
+    public int climbStairs(int n) {
+        //时间复杂度O(n),空间复杂度O(1)
+        //注意n=0时fn=1
+        /*
+        ！！！！！！！！！！！！！！！！！！！
+        此处仍有两种方法未掌握，快速矩阵幂解法没看懂
+         */
+        int fn=0;
+        int fn1=2;
+        int fn2=1;
+        if(n==1) return 1;
+        if(n==2) return 2;
+        int count=3;
+        while(count<=n){
+            fn=fn1+fn2;
+            fn2=fn1;
+            fn1=fn;
+            count++;
+        }
+        return fn;
+    }
+
+
+    /**
+     *69. x 的平方根
+     * 实现 int sqrt(int x) 函数。
+     * 计算并返回 x 的平方根，其中 x 是非负整数。
+     * 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+     */
+    public int mySqrt(int x) {
+        //
+        if(x==1) return 1;
+        double xi=x;
+        while (true){
+            double xi1=(xi+x/xi)/2;
+            if(Math.abs(xi1 - xi) < 1e-7){
+                break;
+            }
+            xi=xi1;
+        }
+        return (int) xi;
+    }
 
     /**
      * 58. 最后一个单词的长度
