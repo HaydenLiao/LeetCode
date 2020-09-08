@@ -1,8 +1,6 @@
 package algorithm.easy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 
 //single-linked list
@@ -34,27 +32,50 @@ public class easy {
      * @return int
      */
     public int lengthOfLongestSubstring(String s) {
+        //时间复杂度O(n),空间复杂度O(n)(s中字母集的大小）
+        //滑动窗口，将未重复字母加到set中并且右指针右移且更新ret值
+        //当下一字母重复时，删除上一字符并重复检验
         int ret=0;
-        HashMap<Character,Integer> temp=new HashMap<>();
-        int[] len=new int[s.length()];
+        Set<Character> temp=new HashSet<>();
+        int end=-1;
         for(int i=0;i<s.length();i++){
-            temp.put(s.charAt(i),i);
-            for(int j=i+1;j<s.length();j++){
-                if(temp.containsKey(s.charAt(j))){
-                    break;
-                }
-                else{
-                    temp.put(s.charAt(j),j);
-                }
+            if(i!=0){
+                temp.remove(s.charAt(i-1));
             }
-            len[i]=temp.size();
-            temp.clear();
-        }
-        for(int i=0;i<len.length;i++){
-            ret=Math.max(ret,len[i]);
+            while (end+1<s.length()&&!temp.contains(s.charAt(end+1))){
+                temp.add(s.charAt(end+1));
+                end++;
+            }
+            ret=Math.max((end-i+1),ret);
         }
         return ret;
     }
+//    public int lengthOfLongestSubstring(String s) {
+//        //暴力解法
+//        //时间复杂度O(n^2),空间复杂度O(n)
+//        //可使用左右指针遍历，将时间复杂度降低到O(n)
+//        //最后寻找窗口最大值也可以在一变循环中找出，无需额外比较
+//        int ret=0;
+//        Set<Character> temp=new HashSet<>();
+//        int[] len=new int[s.length()];
+//        for(int i=0;i<s.length();i++){
+//            temp.add(s.charAt(i));
+//            for(int j=i+1;j<s.length();j++){
+//                if(temp.contains(s.charAt(j))){
+//                    break;
+//                }
+//                else{
+//                    temp.add(s.charAt(j));
+//                }
+//            }
+//            len[i]=temp.size();
+//            temp.clear();
+//        }
+//        for(int i=0;i<len.length;i++){
+//            ret=Math.max(ret,len[i]);
+//        }
+//        return ret;
+//    }
 
 
     /**
