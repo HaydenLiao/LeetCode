@@ -20,10 +20,40 @@ public class easy {
         int[] s= new int[]{1,-2,-2,2,2};
         int target=2;
         String haystack = "      ";
-        String needle = "hhh";
+        String needle = "pwwkew";
 
-        System.out.println();
+        System.out.println(t.lengthOfLongestSubstring(needle));
 
+    }
+
+
+    /**
+     * 3. 无重复字符的最长子串
+     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+     * @param s
+     * @return int
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int ret=0;
+        HashMap<Character,Integer> temp=new HashMap<>();
+        int[] len=new int[s.length()];
+        for(int i=0;i<s.length();i++){
+            temp.put(s.charAt(i),i);
+            for(int j=i+1;j<s.length();j++){
+                if(temp.containsKey(s.charAt(j))){
+                    break;
+                }
+                else{
+                    temp.put(s.charAt(j),j);
+                }
+            }
+            len[i]=temp.size();
+            temp.clear();
+        }
+        for(int i=0;i<len.length;i++){
+            ret=Math.max(ret,len[i]);
+        }
+        return ret;
     }
 
 
@@ -47,6 +77,7 @@ public class easy {
         }
         return a;
     }
+
 
     /**
      * 2. 两数相加

@@ -2,6 +2,8 @@
 
 1.Question1, twoSum, hashmap,
 
+2.Question2, addTwoNumbers, linked-list 链表, 两数相加
+
 2.Question7, reverse, 伪stack,
 
 3.Question9, isPalindrome, 伪stack,
