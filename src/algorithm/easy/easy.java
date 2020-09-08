@@ -18,11 +18,70 @@ public class easy {
         int[] s= new int[]{1,-2,-2,2,2};
         int target=2;
         String haystack = "      ";
-        String needle = "pwwkew";
+        String needle = "abaaaa";
 
-        System.out.println(t.lengthOfLongestSubstring(needle));
+        System.out.println(t.longestPalindrome(needle));
 
     }
+
+
+    /**
+     * 4. 寻找两个正序数组的中位数
+     * 给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。
+     * 请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
+     * 你可以假设 nums1 和 nums2 不会同时为空
+     * @param nums1
+     * @param nums2
+     * @return double
+     */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+        return 0;
+    }
+
+
+    /**
+     * 5. 最长回文子串
+     * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+     * @param s
+     * @return string
+     */
+    public String longestPalindrome(String s) {
+        if(s.length()<2)
+            return s;
+        String ret ="";
+
+        int l=0;
+        int r=0;
+        for(int i=0;i<s.length()-1;i++){
+            String temp=""+s.charAt(i);
+            l=i;
+            r=i+1;
+            while(l>=0&&r<=s.length()-1){
+                if(s.charAt(l)==s.charAt(r)){
+                    l--;
+                    r++;
+                }
+                else break;
+            }
+            temp=s.substring(l+1,r).length()>temp.length()?s.substring(l+1,r):temp;
+            if(i>0){
+                l=i-1;
+                r=i+1;
+                while(l>=0&&r<=s.length()-1){
+                    if(s.charAt(l)==s.charAt(r)){
+                        l--;
+                        r++;
+                    }
+                    else break;
+                }
+                temp=temp.length()>=s.substring(l+1,r).length()?temp:s.substring(l+1,r);
+            }
+         ret=ret.length()>=temp.length()?ret:temp;
+        }
+        return ret;
+    }
+
 
 
     /**
