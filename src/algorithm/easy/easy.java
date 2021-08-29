@@ -19,10 +19,54 @@ public class easy {
         int target=2;
         String haystack = "      ";
         String needle = "abaaaa";
-
-        System.out.println(t.longestPalindrome(needle));
+        int[] arr=new int[]{1,4,2,5,3};//Q1588
+        System.out.println(t.sumOddLengthSubarrays(arr));
+//        System.out.println(t.longestPalindrome(needle));
 
     }
+
+
+    //Question 1588. Sum of All Odd Length Subarrays--------------------------------------------
+    /**
+     * Given an array of positive integers arr, calculate the sum of all possible odd-length subarrays.
+     *
+     * A subarray is a contiguous subsequence of the array.
+     *
+     * Return the sum of all odd-length subarrays of arr.
+     *
+     */
+
+    public int sumOddLengthSubarrays(int[] arr) {
+        int sum=0;
+        int tempsum=0;
+        int count=1;
+        int[] temparr=new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            temparr[i]=arr[i];
+            sum=sum+arr[i];
+        }
+        while(count<=arr.length){
+//            System.out.println(count);
+            point:for(int i=0;i<arr.length-2;i++){
+                if(i+2+count>arr.length){
+                    break;
+                }
+                    tempsum=temparr[i]+arr[i+1+count-1]+arr[i+2+count-1];
+                    temparr[i]=tempsum;
+//                    System.out.println("temparr["+i+"]="+temparr[i]);
+                    sum=sum+temparr[i];
+//                    System.out.println(sum);
+                    tempsum=0;
+            }
+//            System.out.println(count);
+
+            count=count+2;
+        }
+
+        return sum;
+    }
+
+
 
 
     /**
