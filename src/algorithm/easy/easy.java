@@ -15,15 +15,47 @@ public class easy {
     public static void main(String[] args){
 
         easy t=new easy();
-        int[] s= new int[]{1,-2,-2,2,2};
+        int[] s= new int[]{3,1,2,10,1};
         int target=2;
         String haystack = "      ";
         String needle = "abaaaa";
-        int[] arr=new int[]{1,4,2,5,3};//Q1588
-        System.out.println(t.sumOddLengthSubarrays(arr));
+        int[] sum=t.runningSum(s);
+        for(int i:sum){
+            System.out.println(i);
+        }
+
 //        System.out.println(t.longestPalindrome(needle));
 
     }
+
+    //Question 1480. Running Sum of 1d Array
+    /**
+     * Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]).
+     *
+     * Return the running sum of nums.
+     *
+     * Input: nums = [1,2,3,4]
+     * Output: [1,3,6,10]
+     * Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+     *
+     * 自己的解法就是一位数组遍历，但是用了新数组进行储存，最好的方法是直接在原数组上进行修改返回
+     */
+//    public int[] runningSum(int[] nums) {
+//        int[] runningSum=new int[nums.length];
+//        runningSum[0]=nums[0];
+//        for(int i=1;i<nums.length;i++){
+//            runningSum[i]=runningSum[i-1]+nums[i];
+//        }
+//        return runningSum;
+//    }
+    public int[] runningSum(int[] nums) {
+        for(int i=1;i<nums.length;i++){
+            nums[i]=nums[i-1]+nums[i];
+        }
+        return nums;
+    }
+
+
 
 
     //Question 1588. Sum of All Odd Length Subarrays--------------------------------------------
@@ -35,6 +67,8 @@ public class easy {
      * Return the sum of all odd-length subarrays of arr.
      *
      */
+//    int[] arr=new int[]{1,4,2,5,3};//Q1588
+//    System.out.println(t.sumOddLengthSubarrays(arr));//Q1588---output:58
 
     public int sumOddLengthSubarrays(int[] arr) {
         int sum=0;
