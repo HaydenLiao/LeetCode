@@ -28,6 +28,8 @@ public class easy {
     }
 
 
+
+
     //Question 1109.Corporate Flight Bookings
     /**
      * There are n flights that are labeled from 1 to n.
