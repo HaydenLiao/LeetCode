@@ -27,69 +27,28 @@ public class medium {
      */
 
     public int compareVersion(String version1, String version2) {
-        int[] v1=convertCompareVersion(version1);
-        int[] v2=convertCompareVersion(version2);
-        int distance=Math.abs(v1.length-v2.length);
-        int l=0;
-        boolean v1longer=false;
-        boolean equal=false;
-        if(v1.length>v2.length){
-            l=v1.length;
-            v1longer=true;
-        }
-        else
-            l=v2.length;
-        int[] temp=new int[l];
-        if(v1longer==true){
-            for(int i=0;i<v2.length;i++){
-                temp[i]=v2[i];
-            }
-        }
-        else if(l==v2.length&&l==v1.length){
-            equal=true;
-        }
-        else if(v1longer==false&&equal==false){
-            for(int i=0;i<v1.length;i++){
-                temp[i]=v1[i];
-            }
-        }
-
-        for(int i=0;i<l;i++){
-            if(v1longer==true){
-                if(v1[i]>temp[i]){
-                    return 1;
-                }else if(v1[i]<temp[i]){
-                    return -1;}
-            }
-            else if(v1longer==false&&equal==true){
-                if(v1[i]>v2[i]){
-                    return 1;
-                }else if(v1[i]<v2[i]){
-                    return -1;
-                }
-            }
-            if(v1longer==false&&equal==false){
-                if(temp[i]>v2[i]){
-                    return 1;
-                }else if(temp[i]<v2[i]){
-                    return -1;
-                }
-            }
-        }
-
-        return 0;
-
-    }
-    public int[] convertCompareVersion(String version){
         /**
-         * String.split 分割特殊字符需要转义
+         * 官方解法版本，简化了额外储存string arr的空间
+         * 分割需要注意转义字符
          */
-        String[] stringarr=version.split("\\.");
-        int[] arr=new int[stringarr.length];
-        for(int i=0;i<stringarr.length;i++){
-            arr[i]=Integer.parseInt(stringarr[i]);
+        String[] v1=version1.split("\\.");
+        String[] v2=version2.split("\\.");
+        for(int i=0;i<v1.length||i<v2.length;i++){
+            int x=0;
+            int y=0;
+            if(i<v1.length){
+                x=Integer.parseInt(v1[i]);
+            }
+            if(i<v2.length){
+                y=Integer.parseInt(v2[i]);
+            }
+            if(x>y){
+                return 1;
+            }
+            if(x<y){
+                return -1;
+            }
         }
-        return arr;
+        return 0;
     }
-
 }
