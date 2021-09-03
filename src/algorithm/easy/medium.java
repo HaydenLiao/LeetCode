@@ -1,5 +1,8 @@
 package algorithm.easy;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class medium {
     public static void main(String[] args){
         medium t=new medium();
@@ -8,6 +11,28 @@ public class medium {
         System.out.println(t.compareVersion(v1,v2));
 
     }
+
+
+
+    //面试题 17.14. Smallest K LCCI
+    /**
+     * Design an algorithm to find the smallest K numbers in an array.
+     * Input:  arr = [1,3,5,7,2,4,6,8], k = 4
+     * Output:  [1,2,3,4]
+     *
+     * 此题可直接用Arrays.sort()进行排序后返回
+     */
+
+    public int[] smallestK(int[] arr, int k) {
+        int[] ret=new int[k];
+        Arrays.sort(arr);
+        for(int i=0;i<k;i++){
+            ret[i]=arr[i];
+        }
+        return ret;
+
+    }
+
 
 
 
