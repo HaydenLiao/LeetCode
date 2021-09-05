@@ -10,24 +10,31 @@ class ListNode {
 public class easy {
     public static void main(String[] args) {
         easy t=new easy();
-        System.out.println(t.fib(45));
-
-
+        System.out.println(t.fib(5));
 
     }
+
+
+
+
+
+
+
+    /**
+     *
+     * 记得有mod
+     * @param  n
+     * @return int
+     */
     public int fib(int n) {
+        if(n<2){
+            return n;
+        }
         int f=0;
         int s=1;
         int target=1;
         final int MOD = 1000000007;
-        if(n==0){
-            return 0;
-        }else if(n==1){
-            return 1;
-        }
-        f=1;
-        s=1;
-        for(int i=2;i<n;i++){
+        for(int i=2;i<=n;i++){
             target=(f+s)%MOD;
             f=s;
             s=target;
