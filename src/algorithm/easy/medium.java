@@ -7,9 +7,35 @@ import java.util.Random;
 public class medium{
     public static void main(String[] args){
         medium t=new medium();
-        for( int i=0;i<10;i++){
-            System.out.println(t.rand10());
+        int[] chalk=new int[]{3,4,1,2};
+        int k=27;
+        System.out.println(t.chalkReplacer(chalk,k));
+    }
+
+
+    //Q1894. Find the Student that Will Replace the Chalk
+
+    /**
+     *https://leetcode-cn.com/problems/find-the-student-that-will-replace-the-chalk/
+     *
+     * @param chalk
+     * @param k
+     * @return
+     */
+    public int chalkReplacer(int[] chalk, int k) {
+        long round=0;
+        for(int i=0;i<chalk.length;i++){
+            round=round+chalk[i];
         }
+        k= (int) (k%round);
+        for(int i=0;i<chalk.length;i++){
+            if(k<chalk[i]){
+                return i;
+            }
+            else
+                k=k-chalk[i];
+        }
+        return 0;
     }
 
 
