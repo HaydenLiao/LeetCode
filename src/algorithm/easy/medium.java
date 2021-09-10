@@ -16,8 +16,8 @@ public class medium{
     //Q1894. Find the Student that Will Replace the Chalk
 
     /**
-     *https://leetcode-cn.com/problems/find-the-student-that-will-replace-the-chalk/
-     *
+     * https://leetcode-cn.com/problems/find-the-student-that-will-replace-the-chalk/
+     * 可用二分查找来做
      * @param chalk
      * @param k
      * @return
