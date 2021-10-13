@@ -105,11 +105,43 @@ class CQueue {
 
 
 
+
+
+
+
+
+
 public class easy {
     public static void main(String[] args) {
         easy t=new easy();
         System.out.println(t.fib(5));
 
+    }
+
+//剑指 Offer 06. 从尾到头打印链表
+
+    /**
+     * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+     * 输入：head = [1,3,2]
+     * 输出：[2,3,1]
+     */
+    public int[] reversePrint(ListNode head) {
+        int l= getLength(head);
+        int[] ret=new int[l];
+        for(int i=l-1;i>=0;i--){
+            ret[i]=head.val;
+            head=head.next;
+        }
+        return ret;
+    }
+
+    public int getLength(ListNode head){
+        int l=0;
+        while(head!=null){
+            l++;
+            head=head.next;
+        }
+        return l;
     }
 
 
