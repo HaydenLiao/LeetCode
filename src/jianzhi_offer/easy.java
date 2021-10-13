@@ -118,6 +118,27 @@ public class easy {
 
     }
 
+
+    //剑指 Offer 05. 替换空格
+    /**
+     *请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
+     * @param  s
+     * @return String
+     */
+    public String replaceSpace(String s) {
+        String ret="";
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)==' '){
+                ret=ret+"%20";
+            }
+            else{
+                ret=ret+s.charAt(i);
+            }
+        }
+        return ret;
+
+    }
+
 //剑指 Offer 06. 从尾到头打印链表
 
     /**
@@ -160,7 +181,6 @@ public class easy {
             curr.next=prev;
             prev=curr;
             curr=next;
-
         }
         return prev;
 
