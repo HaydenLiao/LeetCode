@@ -212,6 +212,36 @@ public class easy {
     }
 
 
+
+    //剑指 Offer 53 - I. 在排序数组中查找数字 I
+    /**
+     * 统计一个数字在排序数组中出现的次数。
+     * @param nums
+     * @param target
+     * @return
+     */
+//    public int search(int[] nums, int target) {
+//        int count=0;
+//        for(int i=0;i<nums.length;i++){
+//            if(target<nums[i]){
+//                break;
+//            }
+//            if(nums[i]==target){
+//                count ++;
+//            }
+//        }
+//        return count;
+//    }
+//
+    public int search(int[] nums, int target) {
+
+        return 0;
+    }
+
+
+
+
+
     //剑指 Offer 58 - II. 左旋转字符串
 
     /**
