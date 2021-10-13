@@ -56,6 +56,53 @@ class CQueue {
 }
 
 
+    //剑指 Offer 30. 包含min函数的栈
+
+    /**
+     * 定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数
+     * 在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。
+     */
+    class MinStack {
+        /**
+         * Your MinStack object will be instantiated and called as such:
+         * MinStack obj = new MinStack();
+         * obj.push(x);
+         * obj.pop();
+         * int param_3 = obj.top();
+         * int param_4 = obj.min();
+         */
+
+        private Stack<Integer> basicStack;
+        private Stack<Integer> minStack;
+
+        public MinStack() {
+            basicStack=new Stack<>();
+            minStack=new Stack<>();
+        }
+
+        public void push(int x) {
+            basicStack.push(x);
+            if(minStack.isEmpty()||minStack.peek()>=x){
+                minStack.push(x);
+            }
+        }
+
+        public void pop() {
+            int p=basicStack.pop();
+            if(minStack.peek().equals(p)){
+                minStack.pop();
+            }
+        }
+
+        public int top() {
+            return basicStack.peek();
+        }
+
+        public int min() {
+            return minStack.peek();
+        }
+    }
+
 
 
 public class easy {
