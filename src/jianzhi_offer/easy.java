@@ -1,9 +1,7 @@
 package jianzhi_offer;
 
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 class ListNode {
     int val;
@@ -211,6 +209,41 @@ public class easy {
 
     }
 
+    //剑指 Offer 50. 第一个只出现一次的字符
+
+    /**
+     * 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。
+     * @param s
+     * @return
+     */
+//    public char firstUniqChar(String s) {
+//        HashMap<Character,Boolean> dict=new HashMap<Character, Boolean>();
+//        for(char c: s.toCharArray()){
+//            dict.put(c,!dict.containsKey(c));
+//        }
+//        for(char c: s.toCharArray()){
+//            if(dict.get(c)){
+//                return c;
+//            }
+//        }
+//        return ' ';
+//    }
+
+    /**
+     * 用linkedeHashMap实现有序哈希表，第二次只需遍历dict，而非s
+     */
+    public char firstUniqChar(String s) {
+        Map<Character, Boolean> dic = new LinkedHashMap<>();
+        char[] sc = s.toCharArray();
+        for(char c : sc)
+            dic.put(c, !dic.containsKey(c));
+        for(Map.Entry<Character, Boolean> d : dic.entrySet()){
+            if(d.getValue()) return d.getKey();
+        }
+        return ' ';
+    }
+
+
 
 
     //剑指 Offer 53 - I. 在排序数组中查找数字 I
@@ -267,8 +300,6 @@ public class easy {
      * @return int
      * 二分查找下标
      *
-     * [0,1,3,4,5]
-     * 3
      */
 
     public int missingNumber(int[] nums) {
