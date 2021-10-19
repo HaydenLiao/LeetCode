@@ -233,11 +233,58 @@ public class easy {
 //        return count;
 //    }
 //
+
+    /**
+     * 二分查找边界
+     * @param nums
+     * @param target
+     * @return
+     */
     public int search(int[] nums, int target) {
 
-        return 0;
+        return binaryHelper(nums,target)-binaryHelper(nums,target-1);
+    }
+    int binaryHelper(int[] nums, int target){
+        int i=0,j=nums.length-1;
+        while (i <= j) {
+            int mid=(j+i)/2;
+            if(nums[mid]<=target){
+                i=mid+1;
+            }
+            else
+                j=mid-1;
+        }
+        return i;
     }
 
+
+    //剑指 Offer 53 - II. 0～n-1中缺失的数字
+    /**
+     *
+     一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。
+     在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。
+     * @param nums
+     * @return int
+     * 二分查找下标
+     *
+     * [0,1,3,4,5]
+     * 3
+     */
+
+    public int missingNumber(int[] nums) {
+        int i=0;
+        int j=nums.length-1;
+        while(i<=j){
+            int mid=(j+i)/2;
+            if (mid==nums[mid]){
+                i=mid+1;
+            }else{
+                j=mid-1;
+            }
+        }
+        return i;
+
+    }
 
 
 
