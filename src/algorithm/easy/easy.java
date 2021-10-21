@@ -1,5 +1,6 @@
 package algorithm.easy;
 
+import javax.swing.tree.TreeNode;
 import java.util.*;
 
 
@@ -833,4 +834,12 @@ public class easy {
 //        }
 //        throw new IllegalArgumentException("No two sum solution");
 //    }
+
+
+//    606. 根据二叉树创建字符串
+
+    public String tree2str(TreeNode root) {
+        return "";
+
+}
 }

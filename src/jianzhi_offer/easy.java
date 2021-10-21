@@ -188,6 +188,30 @@ public class easy {
         return l;
     }
 
+    //剑指 Offer 10- II. 青蛙跳台阶问题
+
+    /**
+     *一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n级的台阶总共有多少种跳法。
+     * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+     *
+     * @param n
+     * @return
+     */
+    public int numWays(int n) {
+        if(n<=1){
+            return 1;
+        }
+        int first=1;
+        int second=1;
+        int sum=0;
+        for(int i=2;i<=n;i++){
+            sum=(first+second)%1000000007;  //注意sum应该在此处取余，如果在return位置取余会导致sum太大溢出而变为负数
+            first=second;
+            second=sum;
+        }
+        return sum;
+    }
+
 
     //剑指 Offer 11. 旋转数组的最小数字
     //https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/solution/mian-shi-ti-11-xuan-zhuan-shu-zu-de-zui-xiao-shu-3/
