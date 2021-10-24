@@ -1,7 +1,7 @@
 package jianzhi_offer;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 
 class Node {
     int val;
@@ -14,6 +14,14 @@ class Node {
         this.random = null;
     }
 }
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+ }
+
 public class medium {
     public static void main(String[] args){
 
@@ -50,6 +58,36 @@ public class medium {
         return flag;
     }
 
+    //剑指 Offer 32 - I. 从上到下打印二叉树
+    /**
+     *从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
+     * BFS
+     * https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/solution/jian-zhi-offer-32-i-cong-shang-dao-xia-d-myp0/
+     */
+    public int[] levelOrder(TreeNode root) {
+        if(root==null){
+            return new int[0];
+        }
+        else{
+            Queue<TreeNode> queue=new LinkedList<>();
+            ArrayList<Integer> ans=new ArrayList<>();
+            queue.offer(root);//用queue暂时储存当前需要遍历的节点。queue.offer()存储新的节点
+            while(!queue.isEmpty()){
+                TreeNode curr=queue.poll();//queue.poll()抛出队列最前节点，并将其暂时存储在curr中
+                ans.add(curr.val);
+                if (curr.left!=null) {
+                    queue.offer(curr.left);//若当前节点存在左节点，压入queue中
+                }
+                if(curr.right!=null){
+                    queue.offer(curr.right);//若当前节点存在右节点，压入queue中
+                } }
+            int[] ret=new int[ans.size()];
+            for(int i=0;i<ret.length;i++){
+                ret[i]=ans.get(i);
+            }
+            return ret;
+        }
+    }
 
     //剑指 Offer 35. 复杂链表的复制
 
