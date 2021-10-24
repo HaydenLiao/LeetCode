@@ -89,6 +89,34 @@ public class medium {
         }
     }
 
+
+    //剑指 Offer 32 - II. 从上到下打印二叉树 II
+    /**
+     *从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。
+     */
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        Queue<TreeNode> queue=new LinkedList<>();
+        List<List<Integer>> ret=new ArrayList<>();
+        if(root!=null){//此处要检查root是否为null再压入queue中
+            queue.offer(root);
+        }
+        while(!queue.isEmpty()){
+            List<Integer> temp=new ArrayList<>();
+            for(int i=queue.size();i>0;i--){
+                TreeNode node=queue.poll();
+                temp.add(node.val);
+                if(node.left!=null){
+                    queue.offer(node.left);
+                }
+                if(node.right!=null){
+                    queue.offer(node.right);
+                }
+            }
+            ret.add(temp);
+        }
+        return ret;
+    }
+
     //剑指 Offer 35. 复杂链表的复制
 
     /**
