@@ -117,6 +117,59 @@ public class medium {
         return ret;
     }
 
+
+
+    //剑指 Offer 32 - III. 从上到下打印二叉树 III
+    /**
+     *请实现一个函数按照之字形顺序打印二叉树，
+     * 即第一行按照从左到右的顺序打印，
+     * 第二层按照从右到左的顺序打印，
+     * 第三行再按照从左到右的顺序打印，其他行以此类推。
+     * https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/solution/mian-shi-ti-32-iii-cong-shang-dao-xia-da-yin-er--3/
+     */
+    public List<List<Integer>> levelOrder3(TreeNode root) {
+        Queue<TreeNode> queue=new LinkedList<>();
+        List<List<Integer>> ans=new ArrayList<>();
+        boolean leftToRight=true;
+        if(root!=null){
+            queue.offer(root);
+        }
+        while(!queue.isEmpty()){
+            List<Integer> temp=new ArrayList<>();
+            Stack<TreeNode> helper=new Stack<>();
+            for(int i=queue.size();i>0;i--){
+                TreeNode node= queue.poll();
+                temp.add(node.val);
+                if(!leftToRight){
+                    if(node.right!=null){
+                        queue.offer(node.right);
+                    }
+                    if(node.left!=null){
+                        queue.offer(node.left);
+                    }
+                }
+                else {
+                    if(node.left!=null){
+                        queue.offer(node.left);
+                    }
+                    if(node.right!=null){
+                        queue.offer(node.right);
+                    }
+                }
+            }
+            ans.add(temp);
+            while(!queue.isEmpty()){
+                helper.push(queue.poll());
+            }
+            while(!helper.isEmpty()){
+                queue.offer(helper.pop());
+            }
+            leftToRight=!leftToRight;
+        }
+        return ans;
+    }
+
+
     //剑指 Offer 35. 复杂链表的复制
 
     /**
