@@ -140,30 +140,17 @@ public class medium {
             for(int i=queue.size();i>0;i--){
                 TreeNode node= queue.poll();
                 temp.add(node.val);
-                if(!leftToRight){
-                    if(node.right!=null){
-                        queue.offer(node.right);
-                    }
-                    if(node.left!=null){
-                        queue.offer(node.left);
-                    }
+                if(node.left!=null){
+                    queue.offer(node.left);
                 }
-                else {
-                    if(node.left!=null){
-                        queue.offer(node.left);
-                    }
-                    if(node.right!=null){
-                        queue.offer(node.right);
-                    }
+                if(node.right!=null){
+                    queue.offer(node.right);
                 }
+            }
+            if(!leftToRight){
+                Collections.reverse(temp);
             }
             ans.add(temp);
-            while(!queue.isEmpty()){
-                helper.push(queue.poll());
-            }
-            while(!helper.isEmpty()){
-                queue.offer(helper.pop());
-            }
             leftToRight=!leftToRight;
         }
         return ans;
