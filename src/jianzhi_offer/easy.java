@@ -277,6 +277,28 @@ public class easy {
         return root;
     }
 
+    //剑指 Offer 28. 对称的二叉树
+    /**
+     *请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        return isSymmetricChild(root.left,root.right);
+    }
+    boolean isSymmetricChild(TreeNode A,TreeNode B){
+        if(A==null&&B==null){
+            return true;
+        }
+        if(A==null||B==null){
+            return false;
+        }
+        return ((A.val==B.val)&&isSymmetricChild(A.left,B.right)&&isSymmetricChild(A.right,B.left));
+
+
+    }
+
     //剑指 Offer 50. 第一个只出现一次的字符
 
     /**
