@@ -225,12 +225,14 @@ public class medium {
         int min=prices[0];
         int curprof=0;
         for(int i=1;i<prices.length;i++){
-          if( prices[i]-min>curprof ){
-             curprof=prices[i]-min;
-            }
-          if(prices[i]<min){
-              min=prices[i];
-          }
+            min=Math.min(prices[i],min);
+            curprof=Math.max(curprof,prices[i]-min);
+//          if( prices[i]-min>curprof ){
+//             curprof=prices[i]-min;
+//            }
+//          if(prices[i]<min){
+//              min=prices[i];
+//          }
         }
         return curprof;
     }
