@@ -58,6 +58,32 @@ public class medium {
         return flag;
     }
 
+
+    //剑指 Offer 26. 树的子结构
+    /**
+     *输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)
+     * B是A的子结构， 即 A中有出现和B相同的结构和节点值。
+     * https://leetcode-cn.com/problems/shu-de-zi-jie-gou-lcof/solution/mian-shi-ti-26-shu-de-zi-jie-gou-xian-xu-bian-li-p/
+     *
+     */
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if(B==null||A==null){
+            return false;
+        }
+        return(recur(A,B)||isSubStructure(A.left,B)||isSubStructure(A.right,B));
+
+    }
+    boolean recur(TreeNode A,TreeNode B){
+        if(B==null)//在issubstructure里面已经判断过B是否为空节点了，所以此处root必定不为空
+            return true;
+        if(A==null||(A.val!=B.val)){
+            return false;
+        }
+        return recur(A.left,B.left)&&recur(A.right,B.right);
+    }
+
+
+
     //剑指 Offer 32 - I. 从上到下打印二叉树
     /**
      *从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
