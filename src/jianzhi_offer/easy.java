@@ -114,7 +114,9 @@ class CQueue {
 public class easy {
     public static void main(String[] args) {
         easy t=new easy();
-        System.out.println(t.fib(5));
+        int[] nums=new int[]{-2,1,-3,4,-1,2,1,-5,4};
+        int i=t.maxSubArray(nums);
+        System.out.println(i);
 
     }
 
@@ -298,9 +300,26 @@ public class easy {
 
 
     }
+    //剑指 Offer 42. 连续子数组的最大和
+    /**
+     *输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。
+     * 要求时间复杂度为O(n)。
+     *
+     */
+    public int maxSubArray(int[] nums) {
+        if(nums.length==0){
+            return 0;
+        }
+        int tempsum=nums[0];
+        int maxsum=nums[0];
+        for(int i=1;i<nums.length;i++){
+            tempsum=Math.max(tempsum+nums[i], nums[i]);
+            maxsum=Math.max(maxsum,tempsum);
+        }
+        return maxsum;
+    }
 
     //剑指 Offer 50. 第一个只出现一次的字符
-
     /**
      * 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。
      * @param s
