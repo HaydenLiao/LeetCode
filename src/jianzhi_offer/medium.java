@@ -27,7 +27,7 @@ public class medium {
         medium m=new medium();
         int[] array=new int[]{7,2,9,1,10};
         int i=m.maxProfit(array);
-        System.out.println(15/10);
+        System.out.println(m.lengthOfLongestSubstring("bbba"));
 
     }
 
@@ -289,6 +289,24 @@ public class medium {
         }
         return dp[grid.length-1][grid[0].length-1];
 
+    }
+
+    //剑指 Offer 48. 最长不含重复字符的子字符串
+    /**
+     *请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。
+     * https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/mian-shi-ti-48-zui-chang-bu-han-zhong-fu-zi-fu-d-9/
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int temp=0;
+        int max=0;
+        HashMap<Character,Integer> dict=new HashMap();//创建HashMap存储字符
+        for(int j=0;j<s.length();j++){
+            int i=dict.getOrDefault(s.charAt(j),-1);//获取在j位置上字符之前出现的位置，若未出现过，默认为-1
+            dict.put(s.charAt(j),j);//更新j位置上字符的哈希表
+            temp= temp<j-i? temp+1 :j-i;//动态转移方程的判断 DP[j]
+            max=Math.max(temp,max);// max(DP[j],DP[j-1])
+        }
+        return max;
     }
 
     //剑指 Offer 63. 股票的最大利润
