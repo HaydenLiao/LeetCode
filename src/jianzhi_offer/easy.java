@@ -268,22 +268,37 @@ public class easy {
      * 输入一个链表，输出该链表中倒数第k个节点。
      * 为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
      */
-    public ListNode getKthFromEnd(ListNode head, int k) {
+    public ListNode getKthFromEnd1(ListNode head, int k) {
         int l=0;
-        ListNode node=head;
-        while(node!=null){
+        ListNode node=null;
+        for(node=head;node!=null;node=node.next){
             l++;
+        }
+        for(node=head;l>k;l--){
             node=node.next;
         }
-        k=l-k;
-        l=0;
-        while(l!=k){
-            head=head.next;
-            l++;
-        }
-        return head;
-
+        return node;
     }
+
+    /**
+     * 双指针解法，关键点在于fast指针先走k 步，还剩下 N-k步，
+     * 第二次往前走的时候fast和low一起走，都走了N-k步之后 fast到达null，而low到达N-k即倒数第k个节点处
+     * 只需要遍历一次
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        ListNode fast=head;
+        ListNode low=head;
+        while(k>0){
+            fast=fast.next;
+            k--;
+        }
+        while(fast!=null){
+            fast=fast.next;
+            low=low.next;
+        }
+        return low;
+    }
+
 
 
     //剑指 Offer 24. 反转链表
@@ -525,33 +540,7 @@ public class easy {
     }
 
 
-    public ListNode getKthFromEnd1(ListNode head, int k) {
-        /**
-         * ListNode head=new ListNode(1);
-         *         ListNode n=head;
-         *         head.next=new ListNode(2);
-         *         head=head.next;
-         *         head.next=new ListNode(3);
-         *         head=head.next;
-         *         head.next=new ListNode(4);
-         *         head=head.next;
-         *         head.next=new ListNode(5);
-         *         head=head.next;
-         *         head.next=new ListNode(6);
-         *         int k=4;
-         *         ListNode tar=t.getKthFromEnd(n,k);
-         *         System.out.println(tar.val);
-         */
-        int n=0;
-        ListNode target=null;
-        for(target=head;target!=null;target=target.next){
-            n++;
-        }
-        for(target=head;n>k;n--){
-            target=target.next;
-        }
-        return target;
-    }
+
 
 
 
