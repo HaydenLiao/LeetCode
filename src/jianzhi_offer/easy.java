@@ -263,6 +263,28 @@ public class easy {
         return head;
     }
 
+    //剑指 Offer 22. 链表中倒数第k个节点
+    /**
+     * 输入一个链表，输出该链表中倒数第k个节点。
+     * 为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
+     */
+    public ListNode getKthFromEnd(ListNode head, int k) {
+        int l=0;
+        ListNode node=head;
+        while(node!=null){
+            l++;
+            node=node.next;
+        }
+        k=l-k;
+        l=0;
+        while(l!=k){
+            head=head.next;
+            l++;
+        }
+        return head;
+
+    }
+
 
     //剑指 Offer 24. 反转链表
 
@@ -503,7 +525,7 @@ public class easy {
     }
 
 
-    public ListNode getKthFromEnd(ListNode head, int k) {
+    public ListNode getKthFromEnd1(ListNode head, int k) {
         /**
          * ListNode head=new ListNode(1);
          *         ListNode n=head;
