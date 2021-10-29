@@ -27,7 +27,7 @@ public class medium {
         medium m=new medium();
         int[] array=new int[]{7,2,9,1,10};
         int i=m.maxProfit(array);
-        System.out.println(m.translateNum(2));
+        System.out.println(15/10);
 
     }
 
@@ -213,7 +213,6 @@ public class medium {
     }
 
     //剑指 Offer 46. 把数字翻译成字符串
-
     /**
      *给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。
      */
@@ -246,6 +245,22 @@ public class medium {
             }
         }
         return dp[s.length()-1];
+    }
+
+    //https://leetcode-cn.com/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/solution/mian-shi-ti-46-ba-shu-zi-fan-yi-cheng-zi-fu-chua-6/
+    public int translateNumBetterSolution(int num) {
+        int a=1,b=1;
+        int x,y=num%10;//相当于取第i-1位数值
+        while(num!=0){
+            num =num/10; //减小num
+            x = num%10; //相当于取第i位数
+            int temp=10*x+y;
+            int c= temp>=10&&temp <=25? a+b : a;
+            b=a;
+            a=c;
+            y=x;
+        }
+        return a;
     }
 
 
