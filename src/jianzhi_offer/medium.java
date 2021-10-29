@@ -27,7 +27,7 @@ public class medium {
         medium m=new medium();
         int[] array=new int[]{7,2,9,1,10};
         int i=m.maxProfit(array);
-        System.out.println(i);
+        System.out.println(m.translateNum(2));
 
     }
 
@@ -210,6 +210,42 @@ public class medium {
             copyNode.random=copyRandomList(head.random);//递归肤质此节点的random节点
         }
         return cacheNode.get(head);
+    }
+
+    //剑指 Offer 46. 把数字翻译成字符串
+
+    /**
+     *给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。
+     */
+    public int translateNum(int num) {
+        if(num<10){
+            return 1;
+        }
+        String s=""+num;
+        int[] dp=new int[s.length()];
+        dp[0]=1;
+
+        for(int i=1;i<s.length();i++){
+            String helper="";
+            helper=helper+s.charAt(i-1)+s.charAt(i);
+            int helpnum=Integer.parseInt(helper);
+           if(i==1){
+               if(helpnum>=10&&helpnum<=25){
+                   dp[i]=2;
+               }
+               else {
+                   dp[i]=1;
+               }
+               continue;
+           }
+            if(helpnum>=10&&helpnum<=25){
+                dp[i]=dp[i-1]+dp[i-2];
+            }
+            else{
+                dp[i]=dp[i-1];
+            }
+        }
+        return dp[s.length()-1];
     }
 
 
