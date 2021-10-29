@@ -321,6 +321,46 @@ public class easy {
 
     }
 
+    //剑指 Offer 25. 合并两个排序的链表
+    /**
+     *输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
+     *
+     * 递归yyds！！！！！！！！！
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1==null||l2==null){
+            return l1==null? l2 :l1;
+        }
+        if(l1.val<l2.val){
+            l1.next=mergeTwoLists(l1.next,l2);
+            return l1;
+        }
+        else {
+            l2.next=mergeTwoLists(l1,l2.next);
+            return l2;
+        }
+    }
+
+    //双指针，另创一个fakehead
+    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+        ListNode fakeHead=new ListNode(0);
+        ListNode cur=fakeHead;
+        while(l1!=null&&l2!=null){
+            if(l1.val<l2.val){
+                cur.next=l1;
+                l1=l1.next;
+            }
+            else {
+                cur.next=l2;
+                l2=l2.next;
+            }
+            cur=cur.next;
+        }
+        cur.next= l1==null? l2:l1;
+        return fakeHead.next;
+    }
+
+
     //剑指 Offer 27. 二叉树的镜像
     /**
      *请完成一个函数，输入一个二叉树，该函数输出它的镜像。
