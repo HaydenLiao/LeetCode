@@ -263,6 +263,49 @@ public class easy {
         return head;
     }
 
+    //剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
+    /**
+     * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，
+     * 使得所有奇数在数组的前半部分，所有偶数在数组的后半部分。
+     */
+    public int[] exchange1(int[] nums) {
+        int i=0;
+        int j=nums.length-1;
+        int temp;
+        while (i<j){
+            if(nums[i]%2==0){//nums 为偶数
+                temp=nums[j];
+                nums[j]=nums[i];
+                nums[i]=temp;
+                j--;
+            }
+            else{
+                i++;
+            }
+        }
+        return nums;
+    }
+
+
+    /**
+     * 优化答案，在i，j位置上已经为奇偶数时跳过
+     */
+    public int[] exchange(int[] nums) {
+        int i=0,j=nums.length-1,temp;
+        while(i<j){
+            while(i<j&&(nums[i]%2!=0)){
+                i++;
+            }
+            while(i<j&&(nums[j]%2==0)){
+                j--;
+            }
+            temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+        }
+        return nums;
+    }
+
 
 
     //剑指 Offer 22. 链表中倒数第k个节点
