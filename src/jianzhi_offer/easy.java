@@ -263,6 +263,8 @@ public class easy {
         return head;
     }
 
+
+
     //剑指 Offer 22. 链表中倒数第k个节点
     /**
      * 输入一个链表，输出该链表中倒数第k个节点。
@@ -447,6 +449,84 @@ public class easy {
             if(d.getValue()) return d.getKey();
         }
         return ' ';
+    }
+
+    //剑指 Offer 52. 两个链表的第一个公共节点
+    /**
+     * 输入两个链表，找出它们的第一个公共节点。
+     *自己的解法，遍历A，B，求出其长度的差距。
+     * 让长的那个先走gap步的距离，再判断两个node是否相等然后返回
+     */
+    public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
+        ListNode node=null;
+        ListNode temp=null;
+        if(headA==null||headB==null){
+            return node;
+        }
+        int lengthA=0;
+        int lengthB=0;
+        for(temp=headA;temp!=null;temp=temp.next){
+            lengthA++;
+        }
+        for(temp=headB;temp!=null;temp=temp.next){
+            lengthB++;
+        }
+        int gap=lengthA-lengthB;
+        if(gap==0){
+            while(headA!=null&&headB!=null){
+                if(headA.equals(headB)){
+                    return headA;
+                }else {
+                    headA=headA.next;
+                    headB=headB.next;
+                }
+            }
+            return null;
+        }
+        else if(gap>0){
+            while(gap>0){
+                headA=headA.next;
+                gap--;
+            }
+            while(headA!=null&&headB!=null){
+                if(!headA.equals(headB)){
+                    headA=headA.next;
+                    headB=headB.next;
+                }else return headA;
+            }
+            return null;
+        }
+        else {
+            while(gap<0){
+                headB=headB.next;
+                gap++;
+            }
+            while(headA!=null&&headB!=null){
+                if(!headA.equals(headB)){
+                    headA=headA.next;
+                    headB=headB.next;
+                }else return headA;
+            }
+            return null;
+        }
+    }
+
+    /**
+     *最优解答：
+     * 假设A单独长的部分为a，B单独长的部分为b，共同长度为c
+     * 从A开始遍历到结尾再从B出发走到node共走a+c+b步
+     * 从B开始遍历到结尾再从A出发走到node共走b+c+a步
+     * a+c+b==b+c+a
+     * 若此时有共同节点，则返回，若无则返回null
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode A=headA;
+        ListNode B=headB;
+        while (A!=B){
+            A= A!=null? A.next: headB;
+            B= B!=null? B.next:headA;
+        }
+        return A;
     }
 
 
