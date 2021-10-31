@@ -673,6 +673,27 @@ public class easy {
     }
 
 
+    //剑指 Offer 58 - I. 翻转单词顺序
+    /**
+     * 输入一个英文句子，翻转句子中单词的顺序，
+     * 但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理
+     */
+    public String reverseWords(String s) {
+        s=s.trim(); //去除开头和结尾的空格
+        int j=s.length()-1,i=j;
+        StringBuilder ret=new StringBuilder();
+        while(i>=0){
+            while(i>=0&&s.charAt(i)!=' '){//用i搜索单词
+                i--;
+            }
+            ret.append(s.substring(i+1,j+1)+" ");//添加单词并添加空格
+            while(i>=0&&s.charAt(i)==' '){//用i跳过空格
+                i--;
+            }
+            j=i;
+        }
+        return ret.toString().trim();//将StringBuilder转换成string并且去除开头结尾的空格
+    }
 
 
     //剑指 Offer 58 - II. 左旋转字符串
