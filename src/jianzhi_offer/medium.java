@@ -26,8 +26,11 @@ public class medium {
     public static void main(String[] args){
         medium m=new medium();
         int[] array=new int[]{7,2,9,1,10};
+        char[][] board=new char[][]{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};
+        String s="ABCCEDASA";
+        boolean b=m.exist(board,s);
         int i=m.maxProfit(array);
-        System.out.println(m.lengthOfLongestSubstring("bbba"));
+        System.out.println(b);
 
     }
 
@@ -61,6 +64,97 @@ public class medium {
         }
         return flag;
     }
+
+    //剑指 Offer 12. 矩阵中的路径
+    /**
+     *给定一个m x n 二维字符网格board 和一个字符串单词word 。
+     * 如果word 存在于网格中，返回 true ；否则，返回 false 。
+     * 单词必须按照字母顺序，通过相邻的单元格内的字母构成，
+     * 其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。
+     * 同一个单元格内的字母不允许被重复使用。
+     */
+
+    /**
+     *思路：DFS
+     */
+    public boolean exist(char[][] board, String word) {
+        char[] words=word.toCharArray();
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board[0].length;j++){
+                if(dfs(board,words,i,j,0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    boolean dfs(char[][] board,char[] words, int i,int j, int k){  //k为已匹配的字母的个数
+        if(i>=board.length|| i<0 || j>=board[0].length || j<0
+            || board[i][j] != words[k]){       //若i，j越界或者第k个字母不匹配则返回false
+            return false;
+        }
+        if(k==words.length-1){  //在上一步已经判断过k位置上的字母匹配且已经全部匹配完成
+            return true;
+        }
+        board[i][j]='\0';  //走过的路赋值为/0，但与null不一样
+        boolean ret=dfs(board,words,i-1,j,k+1) ||
+                    dfs(board,words,i+1,j,k+1) ||
+                    dfs(board,words,i,j-1,k+1) ||
+                    dfs(board,words,i,j+1,k+1) ;
+        //回溯，恢复原来字符
+        board[i][j]=words[k];    /** 为什么这里要恢复？ ,因为若是此次匹配失败则复原通过路径上的所有位置，
+         否则返回ret之后会判断主函数是否能返回true
+         */
+
+        return ret;
+    }
+
+    //剑指 Offer 13. 机器人的运动范围
+
+    /**
+     *地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。
+     * 一个机器人从坐标 [0, 0] 的格子开始移动，
+     * 它每次可以向左、右、上、下移动一格（不能移动到方格外），
+     * 也不能进入行坐标和列坐标的数位之和大于k的格子。
+     * 例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。
+     * 但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？
+     */
+    /**
+     * DFS
+     * https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/solution/mian-shi-ti-13-ji-qi-ren-de-yun-dong-fan-wei-dfs-b/
+     */
+    int m,n;
+    boolean[][] visited;
+    public int movingCount(int m, int n, int k) {
+        this.m=m;
+        this.n=n;
+        visited=new boolean[m][n];
+        return dfs(0,0,k);
+    }
+    private int dfs(int i,int j,int k){
+        if( i>=m || j>=n                //i,j越界
+            ||visited[i][j]==true     //i,j位置以前访问过
+            || sum(i,j)>k)            //数位和大于k
+        {return 0;}
+        visited[i][j]=true;           //将此格标注为已访问过
+        return 1+dfs(i+1,j,k)+dfs(i,j+1,k);    //继续访问下面和右边的格子
+    }
+
+    private int sum(int i,int j){  //计算i，j的位数和
+        int sum=0;
+        while(i!=0){
+            sum=sum+i%10;
+            i=i/10;
+        }
+        while(j!=0){
+            sum=sum+j%10;
+            j=j/10;
+        }
+        return sum;
+    }
+
+
 
 
     //剑指 Offer 26. 树的子结构
@@ -185,6 +279,19 @@ public class medium {
         }
         return ans;
     }
+
+    //剑指 Offer 34. 二叉树中和为某一值的路径
+
+    /**
+     *给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
+     * 叶子节点 是指没有子节点的节点。
+     */
+//    public List<List<Integer>> pathSum(TreeNode root, int target) {
+//
+//    }
+//    private List<Integer> dfspathSum(TreeNode node,int target){
+//
+//    }
 
 
     //剑指 Offer 35. 复杂链表的复制

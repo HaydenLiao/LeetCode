@@ -646,6 +646,17 @@ public class easy {
 
     }
 
+    //剑指 Offer 54. 二叉搜索树的第k大节点
+    /**
+     * 给定一棵二叉搜索树，请找出其中第k大的节点。
+     */
+    public int kthLargest(TreeNode root, int k) {
+        while(k>0){
+
+        }
+        return 0;
+    }
+
 
     //剑指 Offer 57. 和为s的两个数字
     /**
