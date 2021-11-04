@@ -649,12 +649,25 @@ public class easy {
     //剑指 Offer 54. 二叉搜索树的第k大节点
     /**
      * 给定一棵二叉搜索树，请找出其中第k大的节点。
+     *
+     * 注意是第k大，非第k小
      */
+    int i=0;
+    int ret;
     public int kthLargest(TreeNode root, int k) {
-        while(k>0){
-
+        dfs(root,k);
+        return ret;
+    }
+    private void dfs(TreeNode node,int k){
+        if(node==null||i==k){
+            return ;
         }
-        return 0;
+        dfs(node.right,k);
+        if(++i==k){
+            ret=node.val;
+            return;
+        }
+        dfs(node.left,k);
     }
 
 

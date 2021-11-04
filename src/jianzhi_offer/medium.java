@@ -286,12 +286,25 @@ public class medium {
      *给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
      * 叶子节点 是指没有子节点的节点。
      */
-//    public List<List<Integer>> pathSum(TreeNode root, int target) {
-//
-//    }
-//    private List<Integer> dfspathSum(TreeNode node,int target){
-//
-//    }
+    LinkedList<Integer> path=new LinkedList<>();
+    LinkedList<List<Integer>> ret=new LinkedList<>();
+    public List<List<Integer>> pathSum(TreeNode root, int target) {
+        dfspathSum(root,target);
+        return ret;
+    }
+    private void dfspathSum(TreeNode node,int target){
+        if(node==null){
+            return;
+        }
+        path.add(node.val);
+        target=target-node.val;
+        if(target==0 && node.left==null && node.right==null){
+            ret.add(new LinkedList(path));
+        }
+        dfspathSum(node.left,target);
+        dfspathSum(node.right,target);
+        path.removeLast();
+    }
 
 
     //剑指 Offer 35. 复杂链表的复制
@@ -318,6 +331,56 @@ public class medium {
         }
         return cacheNode.get(head);
     }
+
+
+    //剑指 Offer 36. 二叉搜索树与双向链表
+    /**
+     * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。
+     */
+    class Node36 {
+        public int val;
+        public Node36 left;
+        public Node36 right;
+
+        public Node36() {}
+
+        public Node36(int _val) {
+            val = _val;
+        }
+
+        public Node36(int _val,Node36 _left,Node36 _right) {
+            val = _val;
+            left = _left;
+            right = _right;
+        }
+    }
+    Node36 head,pre;
+    public Node36 treeToDoublyList(Node36 root) {
+        if(root ==null){
+            return null;
+        }
+        dfsNode(root);
+        head.left=pre;
+        pre.right=head;
+        return head;
+    }
+
+    void dfsNode(Node36 cur){
+       if(cur==null){
+           return;
+       }
+       dfsNode(cur.left);
+       if(pre != null){
+           pre.right=cur;
+       }
+       else
+           head=cur;
+       cur.left=pre;
+       pre=cur;
+       dfsNode(cur.right);
+    }
+
+
 
     //剑指 Offer 46. 把数字翻译成字符串
     /**
