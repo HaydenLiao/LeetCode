@@ -380,6 +380,44 @@ public class medium {
        dfsNode(cur.right);
     }
 
+    //剑指 Offer 45. 把数组排成最小的数
+    public String minNumber(int[] nums) {
+        String[] str=new String[nums.length];
+        for(int i=0;i<nums.length;i++){
+            str[i]=String.valueOf(nums[i]);
+        }
+        quickSort(str,0,nums.length-1);
+        StringBuilder ret=new StringBuilder();
+        for(String s:str){
+            ret=ret.append(s);
+        }
+        return ret.toString();
+    }
+    public void quickSort(String[] strs, int low, int high){
+        if(low<high){
+            int middle=getMiddle(strs,low,high);
+            quickSort(strs,low,middle-1);
+            quickSort(strs,middle+1,high);
+        }
+    }
+
+    public int getMiddle(String[] strs,int low,int high){
+        String temp=strs[low];
+        while(low<high){
+            while(low<high && (strs[high]+temp).compareTo(temp+strs[high])>=0){
+                high--;
+            }
+            strs[low]=strs[high];
+            while(low<high && (strs[low]+temp).compareTo(temp+strs[low])<=0){
+                low++;
+            }
+            strs[high]=strs[low];
+        }
+        strs[low]=temp;
+        return low;
+    }
+
+
 
 
     //剑指 Offer 46. 把数字翻译成字符串
