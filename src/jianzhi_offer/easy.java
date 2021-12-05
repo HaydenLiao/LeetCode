@@ -678,6 +678,32 @@ public class easy {
     }
 
 
+    //剑指 Offer 55 - I. 二叉树的深度
+    public int maxDepth(TreeNode root) {
+        if(root!=null){
+            return 1+ Math.max(maxDepth(root.left),maxDepth(root.right));
+        }
+        else {
+            return 0;
+        }
+    }
+
+    //剑指 Offer 55 - II. 平衡二叉树
+    public boolean isBalanced(TreeNode root) {
+        return recur(root) !=-1;
+    }
+    public int recur(TreeNode root){
+        if(root==null){
+            return 0;
+        }
+        int left=recur(root.left);
+        if(left==-1) return -1;
+        int right=recur(root.right);
+        if(right==-1) return -1;
+        return Math.abs(left-right)<2 ? Math.max(left,right)+1 : -1;
+    }
+
+
     //剑指 Offer 57. 和为s的两个数字
     /**
      * 输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。
