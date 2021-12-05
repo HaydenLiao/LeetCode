@@ -380,6 +380,8 @@ public class medium {
        dfsNode(cur.right);
     }
 
+
+
     //剑指 Offer 45. 把数组排成最小的数
     public String minNumber(int[] nums) {
         String[] str=new String[nums.length];
@@ -415,6 +417,30 @@ public class medium {
         }
         strs[low]=temp;
         return low;
+    }
+
+    //剑指 Offer 41. 数据流中的中位数
+    //https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/solution/mian-shi-ti-41-shu-ju-liu-zhong-de-zhong-wei-shu-y/
+    class MedianFinder {
+        Queue<Integer>A,B;
+        /** initialize your data structure here. */
+        public MedianFinder() {
+            A=new PriorityQueue<>();//小顶堆，保存数较大的一半数字
+            B=new PriorityQueue<>((x,y)->(y-x));//大顶堆，保存较小的一半数字
+        }
+
+        public void addNum(int num) {
+            if(A.size()!=B.size()){
+                A.add(num);
+                B.add(A.poll());
+            }else{
+                B.add(num);
+                A.add(B.poll());
+            }
+        }
+        public double findMedian() {
+            return A.size()==B.size()? (A.peek()+B.peek())/2.0 : A.peek();
+        }
     }
 
 
@@ -543,3 +569,5 @@ public class medium {
     }
 
 }
+
+

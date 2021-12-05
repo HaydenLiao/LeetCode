@@ -439,9 +439,16 @@ public class easy {
             return false;
         }
         return ((A.val==B.val)&&isSymmetricChild(A.left,B.right)&&isSymmetricChild(A.right,B.left));
-
-
     }
+
+    //剑指 Offer 40. 最小的k个数
+    public int[] getLeastNumbers(int[] arr, int k) {
+        Arrays.sort(arr);
+        return Arrays.copyOf(arr,k+1);
+    }
+
+
+
     //剑指 Offer 42. 连续子数组的最大和
     /**
      *输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。

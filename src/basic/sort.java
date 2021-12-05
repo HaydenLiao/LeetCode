@@ -1,15 +1,18 @@
 package basic;
 
+import java.util.Arrays;
+
 public class sort {
     public static void main(String[] args){
         sort s=new sort();
         int[] nums=new int[]{1,4,2,9,5};
-        s.quickSort(nums,0,nums.length-1);
+
         for(int i:nums){
             System.out.println(i);
         }
 
     }
+
 
 
     /**
