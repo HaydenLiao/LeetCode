@@ -806,6 +806,53 @@ public class easy {
         return max-min<5;
     }
 
+    //剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
+    /**
+     * 给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。
+     * 搜索树的特点为左小右大
+     */
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
+        /**
+         * 迭代
+         */
+        while(root!=null){
+            if(root.val>p.val&&root.val>q.val){//p,q都在搜索树root的左边
+                root=root.left;
+            }
+            else if(root.val<p.val&&root.val<q.val){//p,q都在root右边
+                root=root.right;
+            }
+            else break;
+        }
+        return root;
+    }
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        /**
+         * 递归
+         */
+        if(root.val>p.val&&root.val>q.val){//p,q都在搜索树root的左边
+            return lowestCommonAncestor(root.left,p,q);
+        }
+        if(root.val<p.val&&root.val<q.val){//p,q都在root右边
+           return lowestCommonAncestor(root.right,p,q);
+        }
+        return root;
+    }
+
+
+
+
+    //剑指 Offer 68 - II. 二叉树的最近公共祖先
+    //https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/solution/mian-shi-ti-68-ii-er-cha-shu-de-zui-jin-gong-gon-7/
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null || root==p || root==q) return root; //如果树为空或者p，q为root则直接返回
+        TreeNode left=lowestCommonAncestor(root.left,p,q); //遍历左子树，先找到排p或q则先返回哪一个
+        TreeNode right=lowestCommonAncestor(root.right,p,q);//遍历右子树，先找到排p或q则先返回哪一个
+        if(left==null) return right;//若左子树中不包括p或者q则返回右子树，右子树中先遍历到的那一个必定为最近公共祖先
+        if(right==null) return left;//若左子树不为空，若右子树为空则p，q必定同在左子树中，左子树中先遍历到的那一个必定为最近公共祖先
+        return root;//若左右子树都不为空则p，q分别在root的左右两侧，则root为最近公共祖先
+    }
+
 
 
 
