@@ -65,6 +65,15 @@ public class medium {
         return flag;
     }
 
+    //剑指 Offer 07. 重建二叉树
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        TreeNode root=null;
+
+        return root;
+
+    }
+
+
     //剑指 Offer 12. 矩阵中的路径
     /**
      *给定一个m x n 二维字符网格board 和一个字符串单词word 。

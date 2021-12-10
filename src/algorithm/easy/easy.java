@@ -28,6 +28,32 @@ public class easy {
 
     }
 
+    //88. 合并两个有序数组
+    /**
+     * 合并两个已经排序好的数组，使其合并之后仍然按照非递减顺序排列
+     * 要求是在O(m+n)时间内完成
+     * 第一思路：双指针,额外长度为o(m+n)的数组辅助
+     * 升级题解思路：逆向双指针，这样就不需要多余的空间
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int k=nums1.length-1;
+        int i=m-1;
+        int j=n-1;
+        while(k>=0){
+            if(j>=0){
+                if(i<0|| nums1[i]<nums2[j]){  //当i<0时无需再继续循环，nums1剩下的数字已经排好序了
+                    nums1[k]=nums2[j];
+                    j--;
+                }else{
+                    nums1[k]=nums1[i];
+                    i--;
+                }
+                k--;
+            }
+            else break;
+        }
+    }
+
 
 
 
