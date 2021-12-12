@@ -116,7 +116,7 @@ public class easy {
         easy t=new easy();
         int[] nums=new int[]{-2,1,-3,4,-1,2,1,-5,4};
         int i=t.maxSubArray(nums);
-        System.out.println(i);
+        System.out.println(1<<0);
 
     }
 
@@ -243,6 +243,21 @@ public class easy {
         return numbers[i];
     }
 
+    //剑指 Offer 15. 二进制中1的个数
+    /**
+     * 编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 '1' 的个数（也被称为 汉明重量).）。
+     * https://baiducloud.tencent.com/developer/article/1338265
+     */
+    public int hammingWeight(int n) {
+        int ret=0;
+        for(int i=0;i<32;i++){   //输入为长度32的二进制串
+            if((n & (1<<i)) !=0){     // &为bit operator，对两边的数进行对比计算： 1&1=1， 1&0=0， 0&1=0， 0&0=0
+                ret++;                // << 为左移运算符，1<<i 为将1进行i次左移，eg： 1<<1 结果为 10(二进制中）
+            }                         // 1<<i也会遇到负数，所以此处使用的是!=0而不是>0   使用1<<i;而不是使用n>>1,因为n>>1会遇到负数(反码)
+        }
+        return ret;
+    }
+
     //剑指 Offer 18. 删除链表的节点
     /**
      * 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
@@ -305,6 +320,7 @@ public class easy {
         }
         return nums;
     }
+
 
 
 
