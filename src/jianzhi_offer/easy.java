@@ -114,9 +114,12 @@ class CQueue {
 public class easy {
     public static void main(String[] args) {
         easy t=new easy();
-        int[] nums=new int[]{-2,1,-3,4,-1,2,1,-5,4};
-        int i=t.maxSubArray(nums);
-        System.out.println(1<<0);
+        int[] nums=new int[]{1, 2, 3, 2, 2, 2, 5, 4, 2};
+        int[][] i=t.findContinuousSequence(9);
+        for(int[] j :i){
+            for(int k:j)
+            System.out.println(k);
+        }
 
     }
 
@@ -457,6 +460,45 @@ public class easy {
         return ((A.val==B.val)&&isSymmetricChild(A.left,B.right)&&isSymmetricChild(A.right,B.left));
     }
 
+    //剑指 Offer 39. 数组中出现次数超过一半的数字
+    /**
+     *数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+     * 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+     * 解法1：hashmap
+     * 解法2：排序后返回处于中位的数字  Arrays.sort(nums); return nums[nums.length/2];
+     * 解法3：摩尔投票法
+     */
+    public int majorityElement(int[] nums) {
+        int vote=0;
+        int x=0;
+        for(int i:nums){
+            if(vote==0){
+                x=i;
+            }
+            vote += i==x? 1:-1;
+        }
+        return x;
+    }
+    public int majorityElement1(int[] nums) {
+        HashMap<Integer,Integer> dict=new HashMap<>();
+        int max=nums[0];
+        for(int i:nums){
+            if(!dict.containsKey(i)){
+                dict.put(i,1);
+            }
+            else {
+                dict.put(i,dict.get(i)+1);
+                if(dict.get(i)>dict.get(max)){
+                    max=i;
+                }
+            }
+        }
+        return max;
+    }
+
+
+
+
     //剑指 Offer 40. 最小的k个数
     public int[] getLeastNumbers(int[] arr, int k) {
         Arrays.sort(arr);
@@ -745,6 +787,39 @@ public class easy {
         return ret;
     }
 
+    //剑指 Offer 57 - II. 和为s的连续正数序列
+    /**
+     * 输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
+     * 序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
+     * https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/solution/shi-yao-shi-hua-dong-chuang-kou-yi-ji-ru-he-yong-h/
+     * 滑动窗口
+     */
+    public int[][] findContinuousSequence(int target) {
+        int i=1;
+        int j=1;
+        int sum=0;
+        List<int[]> res=new ArrayList<>();
+        while(i<=target/2){
+            if(sum<target){
+                sum +=j;
+                j++;
+            }else if(sum>target){
+                sum -=i;
+                i++;
+            }else{
+                int[] arr=new int[j-i];
+                for(int k=i;k<j;k++){
+                    arr[k-i]=k;
+                }
+                res.add(arr);
+                sum -=i;
+                i++;
+            }
+
+        }
+        return res.toArray(new int[res.size()][]);
+    }
+
 
     //剑指 Offer 58 - I. 翻转单词顺序
     /**
@@ -820,6 +895,19 @@ public class easy {
             num.add(i);
         }
         return max-min<5;
+    }
+
+    //剑指 Offer 65. 不用加减乘除做加法
+    /**
+     * 写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。
+     * https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/solution/mian-shi-ti-65-bu-yong-jia-jian-cheng-chu-zuo-ji-7/
+     */
+    public int add(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        // 转换成非进位和 + 进位
+        return add(a ^ b, (a & b) << 1);
     }
 
     //剑指 Offer 68 - I. 二叉搜索树的最近公共祖先
