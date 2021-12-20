@@ -895,5 +895,27 @@ public class easy {
         return sum-(k%2==0 ? 0 : 2*nums[0]);//若此时k依旧有剩余，进行判断并减去二倍最小值
     }
 
+    //1154. Day of the Year
+    /**
+     * Given a string date representing a Gregorian calendar date formatted as YYYY-MM-DD,
+     * return the day number of the year.
+     * 四年一闰,百年不闰,四百年再闰.
+     */
+    public int dayOfYear(String date) {
+        int year=Integer.parseInt(date.substring(0,4));
+        int month=Integer.parseInt(date.substring(5,7));;
+        int day=Integer.parseInt(date.substring(8));;
+        int[] dayPerMonth=new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
+        boolean isLeapYear=false;
+        if(year%400==0|| (year%4==0 && year%100!=0)){
+            dayPerMonth[1]=29;
+        }
+        int res=0;
+        for(int i=0;i<month-1;i++){
+            res=res+dayPerMonth[i];
+        }
+        return res+day;
+    }
+
 
 }
