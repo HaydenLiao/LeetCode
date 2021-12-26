@@ -5,11 +5,11 @@ import java.util.*;
 
 
 //single-linked list
-class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
-  }
+//class ListNode {
+//      int val;
+//      ListNode next;
+//      ListNode(int x) { val = x; }
+//  }
 
 
 public class easy {
@@ -18,8 +18,9 @@ public class easy {
         easy t=new easy();
         int[][] s= new int[][]{{1,2,10},{2,3,20},{2,5,25}};
         int n=5;
+        int[] two=new int[]{2,3,4};
 
-        int[] ans=t.corpFlightBookings(s,n);
+        int[] ans=t.twoSum(two,6);
         for(int i:ans){
             System.out.println(i);
         }
@@ -285,21 +286,21 @@ public class easy {
      * @param listNode
      * @return
      */
-    public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
-        ArrayList<Integer> a = new ArrayList<Integer>();
-        ListNode temp = listNode;
-        while(temp != null){
-            a.add(new Integer(temp.val));
-            temp = temp.next;
-        }
-        Integer b ;
-        for(int i=0; i<a.size()/2;i++){
-            b = a.get(i);
-            a.set(i, a.get(a.size()-i-1));
-            a.set(a.size()-i-1,b);
-        }
-        return a;
-    }
+//    public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+//        ArrayList<Integer> a = new ArrayList<Integer>();
+//        ListNode temp = listNode;
+//        while(temp != null){
+//            a.add(new Integer(temp.val));
+//            temp = temp.next;
+//        }
+//        Integer b ;
+//        for(int i=0; i<a.size()/2;i++){
+//            b = a.get(i);
+//            a.set(i, a.get(a.size()-i-1));
+//            a.set(a.size()-i-1,b);
+//        }
+//        return a;
+//    }
 
 
     /**
@@ -311,32 +312,32 @@ public class easy {
      * @param l2
      * @return linked-list
      */
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        //测试用例
-        /**ListNode l1=new ListNode(9);
-         ListNode l2=new ListNode(8);
-         ListNode p=t.addTwoNumbers(l1,l2);
-         System.out.println(t.printListFromTailToHead(p));
-         */
-        //时间复杂度O(max(m,n)),空间复杂度O(max(m,n))
-        ListNode dummyHead = new ListNode(0);
-        ListNode cur=dummyHead;
-        int carry=0;          //carry:进位
-        while(l1!=null||l2!=null){
-            int p=l1!=null? l1.val : 0;//三元表达式
-            int q=l2!=null? l2.val : 0;
-            int sum=p+q+carry;
-            cur.next=new ListNode(sum%10);
-            carry=sum/10;
-            cur=cur.next;
-            if(l1!=null) l1=l1.next;
-            if(l2!=null) l2=l2.next;
-        }
-        if(carry>0){
-            cur.next=new ListNode(carry);
-        }
-        return dummyHead.next;
-    }
+//    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//        //测试用例
+//        /**ListNode l1=new ListNode(9);
+//         ListNode l2=new ListNode(8);
+//         ListNode p=t.addTwoNumbers(l1,l2);
+//         System.out.println(t.printListFromTailToHead(p));
+//         */
+//        //时间复杂度O(max(m,n)),空间复杂度O(max(m,n))
+//        ListNode dummyHead = new ListNode(0);
+//        ListNode cur=dummyHead;
+//        int carry=0;          //carry:进位
+//        while(l1!=null||l2!=null){
+//            int p=l1!=null? l1.val : 0;//三元表达式
+//            int q=l2!=null? l2.val : 0;
+//            int sum=p+q+carry;
+//            cur.next=new ListNode(sum%10);
+//            carry=sum/10;
+//            cur=cur.next;
+//            if(l1!=null) l1=l1.next;
+//            if(l2!=null) l2=l2.next;
+//        }
+//        if(carry>0){
+//            cur.next=new ListNode(carry);
+//        }
+//        return dummyHead.next;
+//    }
 
 
 
@@ -816,49 +817,42 @@ public class easy {
 
 
 
-//Question 1------------------------------------------------------
-    public int[] twoSum(int[] nums, int target){
-        /**
-         * Question 1
-         *给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
-         * 一遍hashmap，时间复杂度为O（n）
-         *
-         * 下面有暴力法，时间复杂度为O（n^2)
-         */
-        HashMap<Integer, Integer> map=new HashMap<>();
+//Question 1-----twoSum-------------------------------------------------
+    public int[] twoSum(int[] nums, int target) {
+//        int[] ret=new int[2];
+        HashMap<Integer,Integer> dict=new HashMap<>();
         for(int i=0;i<nums.length;i++){
-            if(i==0){
-                map.put(nums[i],i);
+            int rest=target-nums[i];
+            if(dict.containsKey(rest)){
+                return (new int[]{i,dict.get(rest)});
             }
-            else{
-                int res=(target-nums[i]);
-                if(map.containsKey(res)){
-                    return new int[]{map.get(res),i};
-                }
-                map.put(nums[i],i);
-            }
+            dict.put(nums[i],i);
         }
-        throw new IllegalArgumentException("No two sum solution");
+        return new int[]{0,0};
     }
 
-//    public int[] twoSum(int[] nums, int target) {
-//        /**
-//         * Question 1
-//         * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-//         * You may assume that each input would have exactly one solution, and you may not use the same element twice.
-//         */
-//        for(int i=0;i<nums.length;i++){
-//            if(nums[i]>target){
-//                continue;
-//            }
-//            for(int j=i+1;j<nums.length;j++){
-//                if(nums[i]+nums[j]==target){
-//                    return new int[]{i,j};
-//                }
-//            }
-//
-//        }
-//        throw new IllegalArgumentException("No two sum solution");
+
+
+//    231. Power of Two
+
+    /**
+     * Given an integer n, return true if it is a power of two. Otherwise, return false.
+     * An integer n is a power of two, if there exists an integer x such that n == 2x.
+     */
+    public boolean isPowerOfTwo(int n) {
+        if (n>0){
+            if(n==1){
+                return true;
+            }else if(n%2!=0){
+                return false;
+            }else
+                return isPowerOfTwo(n/2);
+        }
+        return false;
+    }
+    //位运算 bit operation
+//    public boolean isPowerOfTwo(int n) {
+//        return ((n & (n-1))==0 && n>0);
 //    }
 
 

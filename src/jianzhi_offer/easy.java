@@ -3,11 +3,11 @@ package jianzhi_offer;
 
 import java.util.*;
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-}
+//public class ListNode {
+//    int val;
+//    ListNode next;
+//    ListNode(int x) { val = x; }
+//}
 
 
 //剑指 Offer 09. 用两个栈实现队列
@@ -174,24 +174,24 @@ public class easy {
      * 输入：head = [1,3,2]
      * 输出：[2,3,1]
      */
-    public int[] reversePrint(ListNode head) {
-        int l= getLength(head);
-        int[] ret=new int[l];
-        for(int i=l-1;i>=0;i--){
-            ret[i]=head.val;
-            head=head.next;
-        }
-        return ret;
-    }
-
-    public int getLength(ListNode head){
-        int l=0;
-        while(head!=null){
-            l++;
-            head=head.next;
-        }
-        return l;
-    }
+//    public int[] reversePrint(ListNode head) {
+//        int l= getLength(head);
+//        int[] ret=new int[l];
+//        for(int i=l-1;i>=0;i--){
+//            ret[i]=head.val;
+//            head=head.next;
+//        }
+//        return ret;
+//    }
+//
+//    public int getLength(ListNode head){
+//        int l=0;
+//        while(head!=null){
+//            l++;
+//            head=head.next;
+//        }
+//        return l;
+//    }
 
     //剑指 Offer 10- II. 青蛙跳台阶问题
 
@@ -266,20 +266,20 @@ public class easy {
      * 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
      * 返回删除后的链表的头节点。
      */
-    public ListNode deleteNode(ListNode head, int val) {
-        if(head.val==val){
-            return head.next;
-        }
-        ListNode cur=head;
-        while(cur.next!=null){
-            if(cur.next.val==val){
-                cur.next=cur.next.next;//因为listnode没有prev，所以只能用next.next进行判断
-                break;
-            }
-            cur=cur.next;
-        }
-        return head;
-    }
+//    public ListNode deleteNode(ListNode head, int val) {
+//        if(head.val==val){
+//            return head.next;
+//        }
+//        ListNode cur=head;
+//        while(cur.next!=null){
+//            if(cur.next.val==val){
+//                cur.next=cur.next.next;//因为listnode没有prev，所以只能用next.next进行判断
+//                break;
+//            }
+//            cur=cur.next;
+//        }
+//        return head;
+//    }
 
     //剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
     /**
@@ -332,36 +332,36 @@ public class easy {
      * 输入一个链表，输出该链表中倒数第k个节点。
      * 为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。
      */
-    public ListNode getKthFromEnd1(ListNode head, int k) {
-        int l=0;
-        ListNode node=null;
-        for(node=head;node!=null;node=node.next){
-            l++;
-        }
-        for(node=head;l>k;l--){
-            node=node.next;
-        }
-        return node;
-    }
+//    public ListNode getKthFromEnd1(ListNode head, int k) {
+//        int l=0;
+//        ListNode node=null;
+//        for(node=head;node!=null;node=node.next){
+//            l++;
+//        }
+//        for(node=head;l>k;l--){
+//            node=node.next;
+//        }
+//        return node;
+//    }
 
     /**
      * 双指针解法，关键点在于fast指针先走k 步，还剩下 N-k步，
      * 第二次往前走的时候fast和low一起走，都走了N-k步之后 fast到达null，而low到达N-k即倒数第k个节点处
      * 只需要遍历一次
      */
-    public ListNode getKthFromEnd(ListNode head, int k) {
-        ListNode fast=head;
-        ListNode low=head;
-        while(k>0){
-            fast=fast.next;
-            k--;
-        }
-        while(fast!=null){
-            fast=fast.next;
-            low=low.next;
-        }
-        return low;
-    }
+//    public ListNode getKthFromEnd(ListNode head, int k) {
+//        ListNode fast=head;
+//        ListNode low=head;
+//        while(k>0){
+//            fast=fast.next;
+//            k--;
+//        }
+//        while(fast!=null){
+//            fast=fast.next;
+//            low=low.next;
+//        }
+//        return low;
+//    }
 
 
 
@@ -372,18 +372,18 @@ public class easy {
      * @param head
      * @return
      */
-    public ListNode reverseList(ListNode head) {
-        ListNode prev=null;
-        ListNode curr=head;
-        while (curr!=null){
-            ListNode next=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=next;
-        }
-        return prev;
-
-    }
+//    public ListNode reverseList(ListNode head) {
+//        ListNode prev=null;
+//        ListNode curr=head;
+//        while (curr!=null){
+//            ListNode next=curr.next;
+//            curr.next=prev;
+//            prev=curr;
+//            curr=next;
+//        }
+//        return prev;
+//
+//    }
 
     //剑指 Offer 25. 合并两个排序的链表
     /**
@@ -391,38 +391,38 @@ public class easy {
      *
      * 递归yyds！！！！！！！！！
      */
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if(l1==null||l2==null){
-            return l1==null? l2 :l1;
-        }
-        if(l1.val<l2.val){
-            l1.next=mergeTwoLists(l1.next,l2);
-            return l1;
-        }
-        else {
-            l2.next=mergeTwoLists(l1,l2.next);
-            return l2;
-        }
-    }
+//    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+//        if(l1==null||l2==null){
+//            return l1==null? l2 :l1;
+//        }
+//        if(l1.val<l2.val){
+//            l1.next=mergeTwoLists(l1.next,l2);
+//            return l1;
+//        }
+//        else {
+//            l2.next=mergeTwoLists(l1,l2.next);
+//            return l2;
+//        }
+//    }
 
     //双指针，另创一个fakehead
-    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
-        ListNode fakeHead=new ListNode(0);
-        ListNode cur=fakeHead;
-        while(l1!=null&&l2!=null){
-            if(l1.val<l2.val){
-                cur.next=l1;
-                l1=l1.next;
-            }
-            else {
-                cur.next=l2;
-                l2=l2.next;
-            }
-            cur=cur.next;
-        }
-        cur.next= l1==null? l2:l1;
-        return fakeHead.next;
-    }
+//    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+//        ListNode fakeHead=new ListNode(0);
+//        ListNode cur=fakeHead;
+//        while(l1!=null&&l2!=null){
+//            if(l1.val<l2.val){
+//                cur.next=l1;
+//                l1=l1.next;
+//            }
+//            else {
+//                cur.next=l2;
+//                l2=l2.next;
+//            }
+//            cur=cur.next;
+//        }
+//        cur.next= l1==null? l2:l1;
+//        return fakeHead.next;
+//    }
 
 
     //剑指 Offer 27. 二叉树的镜像
@@ -565,59 +565,59 @@ public class easy {
      *自己的解法，遍历A，B，求出其长度的差距。
      * 让长的那个先走gap步的距离，再判断两个node是否相等然后返回
      */
-    public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
-        ListNode node=null;
-        ListNode temp=null;
-        if(headA==null||headB==null){
-            return node;
-        }
-        int lengthA=0;
-        int lengthB=0;
-        for(temp=headA;temp!=null;temp=temp.next){
-            lengthA++;
-        }
-        for(temp=headB;temp!=null;temp=temp.next){
-            lengthB++;
-        }
-        int gap=lengthA-lengthB;
-        if(gap==0){
-            while(headA!=null&&headB!=null){
-                if(headA.equals(headB)){
-                    return headA;
-                }else {
-                    headA=headA.next;
-                    headB=headB.next;
-                }
-            }
-            return null;
-        }
-        else if(gap>0){
-            while(gap>0){
-                headA=headA.next;
-                gap--;
-            }
-            while(headA!=null&&headB!=null){
-                if(!headA.equals(headB)){
-                    headA=headA.next;
-                    headB=headB.next;
-                }else return headA;
-            }
-            return null;
-        }
-        else {
-            while(gap<0){
-                headB=headB.next;
-                gap++;
-            }
-            while(headA!=null&&headB!=null){
-                if(!headA.equals(headB)){
-                    headA=headA.next;
-                    headB=headB.next;
-                }else return headA;
-            }
-            return null;
-        }
-    }
+//    public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
+//        ListNode node=null;
+//        ListNode temp=null;
+//        if(headA==null||headB==null){
+//            return node;
+//        }
+//        int lengthA=0;
+//        int lengthB=0;
+//        for(temp=headA;temp!=null;temp=temp.next){
+//            lengthA++;
+//        }
+//        for(temp=headB;temp!=null;temp=temp.next){
+//            lengthB++;
+//        }
+//        int gap=lengthA-lengthB;
+//        if(gap==0){
+//            while(headA!=null&&headB!=null){
+//                if(headA.equals(headB)){
+//                    return headA;
+//                }else {
+//                    headA=headA.next;
+//                    headB=headB.next;
+//                }
+//            }
+//            return null;
+//        }
+//        else if(gap>0){
+//            while(gap>0){
+//                headA=headA.next;
+//                gap--;
+//            }
+//            while(headA!=null&&headB!=null){
+//                if(!headA.equals(headB)){
+//                    headA=headA.next;
+//                    headB=headB.next;
+//                }else return headA;
+//            }
+//            return null;
+//        }
+//        else {
+//            while(gap<0){
+//                headB=headB.next;
+//                gap++;
+//            }
+//            while(headA!=null&&headB!=null){
+//                if(!headA.equals(headB)){
+//                    headA=headA.next;
+//                    headB=headB.next;
+//                }else return headA;
+//            }
+//            return null;
+//        }
+//    }
 
     /**
      *最优解答：
@@ -627,15 +627,15 @@ public class easy {
      * a+c+b==b+c+a
      * 若此时有共同节点，则返回，若无则返回null
      */
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        ListNode A=headA;
-        ListNode B=headB;
-        while (A!=B){
-            A= A!=null? A.next: headB;
-            B= B!=null? B.next:headA;
-        }
-        return A;
-    }
+//    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//        ListNode A=headA;
+//        ListNode B=headB;
+//        while (A!=B){
+//            A= A!=null? A.next: headB;
+//            B= B!=null? B.next:headA;
+//        }
+//        return A;
+//    }
 
 
 
