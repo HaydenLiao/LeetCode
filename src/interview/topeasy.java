@@ -2,6 +2,7 @@ package interview;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -9,8 +10,61 @@ import java.util.Stack;
 public class topeasy {
     public static void main(String[] args){
         topeasy t=new topeasy();
-        System.out.println(t.isValidTwo("()"));
+        System.out.println();
 
+    }
+    public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+     }
+  }
+
+    public boolean isSymmetric(TreeNode root) {
+        if (root==null) return true;
+        return isSymmetricSubTree(root.left,root.right);
+    }
+    public boolean isSymmetricSubTree(TreeNode left,TreeNode right){
+        if (left==null&&right==null) return true;
+        if(left==null||right==null) return false;
+        return (left.val==right.val)&&isSymmetricSubTree(left.left,right.right)&&isSymmetricSubTree(left.right,right.left);
+    }
+
+
+
+    //94. Binary Tree Inorder Traversal
+    List<Integer> tree=new ArrayList<>();
+    public List<Integer> inorderTraversalRecursion(TreeNode root) {
+        if(root==null){
+           return tree;
+        }
+        inorderTraversal(root.left);
+        tree.add(root.val);
+        inorderTraversal(root.right);
+        return tree;
+    }
+
+    /**
+     * 不使用全局变量的方法
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        return inorder(root, res);
+    }
+    public List<Integer> inorder(TreeNode root, List<Integer> res) {
+        if (root == null) {
+            return res;
+        }
+        inorder(root.left, res);
+        res.add(root.val);
+        inorder(root.right, res);
+        return res;
     }
 
 
