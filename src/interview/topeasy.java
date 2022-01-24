@@ -3,6 +3,54 @@ package interview;
 
 
 import java.util.*;
+//303. Range Sum Query - Immutable
+class NumArray {
+    int[] sum;
+    public NumArray(int[] nums) {
+        sum=new int[nums.length+1];
+        for(int i=0;i<nums.length;i++){
+            sum[i+1]=sum[i]+nums[i];
+        }
+    }
+    public int sumRange(int left, int right) {
+        return sum[right+1]-sum[left];
+    }
+}
+
+//232. Implement Queue using Stacks
+class MyQueue {
+    Stack<Integer> S1;
+    Stack<Integer> S2;
+
+    public MyQueue() {
+        S1=new Stack<>();
+        S2=new Stack<>();
+    }
+
+    public void push(int x) {
+       S2.push(x);
+    }
+    public int pop() {
+        if(S1.isEmpty()){
+            while (!S2.isEmpty()){
+                S1.push(S2.pop());
+            }
+        }
+        return S1.pop();
+    }
+    public int peek() {
+        if(S1.isEmpty()){
+            while (!S2.isEmpty()){
+                S1.push(S2.pop());
+            }
+        }
+        return S1.peek();
+    }
+
+    public boolean empty() {
+        return (S1.isEmpty()&&S2.isEmpty());
+    }
+}
 class MinStack {
     Deque<Integer> basicStack;
     Deque<Integer> minStack;
@@ -31,6 +79,39 @@ class MinStack {
 
     }
 }
+//225. Implement Stack using Queues
+class MyStack {
+    Queue<Integer> Q1;
+    Queue<Integer> Q2;
+
+    public MyStack() {
+        Q1=new LinkedList<>();
+        Q2=new LinkedList<>();
+
+    }
+
+    public void push(int x) {
+        Q2.offer(x);
+        while (!Q1.isEmpty()){
+            Q2.offer(Q1.poll());
+        }
+        Queue<Integer> temp=Q1;
+        Q1=Q2;
+        Q2=temp;
+
+    }
+    public int pop() {
+        return Q1.poll();
+    }
+
+    public int top() {
+        return Q1.peek();
+    }
+
+    public boolean empty() {
+        return Q1.isEmpty();
+    }
+}
 
 public class topeasy {
     public static void main(String[] args){
@@ -40,9 +121,11 @@ public class topeasy {
         root.right=new TreeNode(20);
         root.right.left=new TreeNode(15);
         root.right.right=new TreeNode(7);
+        int[] nums=new int[]{0,1,2,4,5,7};
+        String pa="abba";
+        String s="dog cat cat dog";
 
-
-        System.out.println(t.isBalanced(root));
+        System.out.println(t.wordPattern(pa,s));
 
     }
     public static class TreeNode {
@@ -67,6 +150,187 @@ public class topeasy {
         root1.val=root1.val+root2.val;
         return root1;
   }
+
+  //234. Palindrome Linked List
+    //也可以用快慢指针，快指针到队尾时慢指针在最中间,然后用后半部分反转进行比较
+  public boolean isPalindrome(ListNode head) {
+        if (head==null) return true;
+        List<Integer> list=new ArrayList<>();
+
+        while (head!=null){
+            list.add(head.val);
+            head=head.next;
+        }
+        for(int i=0,j=list.size()-1;i<j;i++,j--){
+            if(list.get(i)!=list.get(j)){
+                return false;
+            }
+        }
+        return true;
+  }
+  //292. Nim Game
+    //n为4的倍数时必输
+  public boolean canWinNim(int n) {
+        return n%4!=0;
+  }
+  //290. Word Pattern
+  public boolean wordPattern(String pattern, String s) {
+        String[] splits=s.split(" ");
+        if(pattern.length()!=splits.length) return false;
+        HashMap<Character,String> pTos=new HashMap<>();
+        for(int i=0;i<pattern.length();i++){
+            char p=pattern.charAt(i);
+            String ss=splits[i];
+            if(!pTos.containsKey(p)){
+                if(!pTos.containsValue(ss)){
+                    pTos.put(p,ss);
+                }else return false;
+            }else {
+                if(!Objects.equals(pTos.get(p),ss)) return false;
+            }
+        }
+        return true;
+  }
+
+  //278. First Bad Version
+    //二分搜索
+  public int firstBadVersion(int n) {
+        int left=1;
+        int right=n;
+        while (left<right){
+            int mid=left+(right-left)/2; //用left+right/2会超出时间限制
+//            if(isBadVersion(mid)){
+//                right=mid;
+//            }else {
+//                left=mid+1;
+//            }
+        }
+        return left;
+  }
+
+  //263. Ugly Number n=2^x+3^y+5^z (x,y,z都为0时n=1，所以1也是ugly number)
+  public boolean isUgly(int n) {
+        if(n<=0){
+            return false;
+        }
+        int[] factors=new int[]{2,3,5};
+        for(int factor:factors){
+            while (n%factor==0){
+                n/= factor;
+            }
+        }
+        return n==1;
+  }
+
+
+
+
+  //258. Add Digits
+    /* 递归：
+     *public int addDigits(int num) {
+    if (num < 10) {
+        return num;
+    }
+    int next = 0;
+    while (num != 0) {
+        next = next + num % 10;
+        num /= 10;
+    }
+    return addDigits(next);
+}
+     */
+  public int addDigits(int num) {
+       int a=0;
+       int ret=0;
+       while(num>=10){
+           ret=ret+num/10;
+           num=num%10;
+           if(num<10){
+               ret=ret+num;
+               num=ret;
+               ret=0;
+           }
+       }
+      return num;
+  }
+
+  //257. Binary Tree Paths
+  public List<String> binaryTreePaths(TreeNode root) {
+        List<String> paths=new ArrayList<>();
+        constructPath(root,"",paths);
+        return paths;
+  }
+  public void constructPath(TreeNode root,String path, List<String> paths){
+        if(root!=null){
+            StringBuilder pathSB=new StringBuilder(path);
+            pathSB.append(Integer.toString(root.val));
+            if(root.left==null&&root.right==null){
+                paths.add(pathSB.toString());
+            }else {
+                pathSB.append("->");
+                constructPath(root.left,pathSB.toString(),paths);
+                constructPath(root.right,pathSB.toString(),paths);
+            }
+        }
+  }
+
+
+  //242. Valid Anagram
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()) return false;
+        int[] dictionary=new int[26];
+        for(int i=0;i<s.length();i++){
+            dictionary[s.charAt(i)-'a']++;
+            dictionary[t.charAt(i)-'a']--;
+        }
+        for (int i=0;i<26;i++){
+            if (dictionary[i] !=0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+  //237. Delete Node in a Linked List
+  public void deleteNode(ListNode node) {
+        node.val=node.next.val;
+        node.next=node.next.next;
+  }
+
+  //235. Lowest Common Ancestor of a Binary Search Tree
+  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ancestor=root;
+        while (true){
+            if(p.val<ancestor.val&&q.val<ancestor.val){
+                ancestor=ancestor.left;
+            }else if(p.val>ancestor.val&&q.val>ancestor.val){
+                ancestor=ancestor.right;
+            }else{
+                break;
+            }
+        }
+        return ancestor;
+  }
+
+
+  //228. Summary Ranges
+    public List<String> summaryRanges(int[] nums) {
+        List<String> ret=new ArrayList<>();
+        for(int i=0;i<nums.length;){
+            int j=i;
+            while(j+1<nums.length&&nums[j]+1==nums[j+1]){
+                j++;
+            }
+            if(i==j){
+                ret.add(nums[i]+"");
+            }else {
+                ret.add(nums[i]+"->"+nums[j]);
+            }
+            i=j+1;
+        }
+        return ret;
+    }
+
   //543. Diameter of Binary Tree
     int maxd=0;
   public int diameterOfBinaryTree(TreeNode root) {
@@ -160,6 +424,16 @@ public class topeasy {
         root.right=right;
         root.left=left;
         return root;
+    }
+
+    //111. Minimum Depth of Binary Tree
+    //要注意一边子节点为空的情况
+    public int minDepth(TreeNode root) {
+      if(root==null) return 0;
+      if(root.left==null&&root.right==null)return 1;
+      int left=minDepth(root.left);
+      int right=minDepth(root.right);
+      return (left==0||right==0)? left+right+1: Math.min(left,right)+1;
     }
 
     //110. Balanced Binary Tree
@@ -370,6 +644,93 @@ public class topeasy {
         res.add(root.val);
         inorder(root.right, res);
         return res;
+    }
+    //202. Happy Number
+    //https://leetcode-cn.com/problems/happy-number/
+    public boolean isHappy(int n) {
+
+        return false;
+    }
+    //219. Contains Duplicate II
+    //sliding window
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        if(nums.length<=1)return false;
+        HashSet<Integer> set=new HashSet<>();
+        for(int i=0;i< nums.length;i++){
+            if(set.contains(nums[i])) return true;
+            set.add(nums[i]);
+            if (set.size()>k){
+                set.remove(nums[i-k]);
+            }
+        }
+        return false;
+    }
+    public boolean containsNearbyDuplicateHashMap(int[] nums, int k) {
+        if(nums.length<=1)return false;
+        HashMap<Integer,Integer> dict=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(dict.containsKey(nums[i])&&(i-dict.get(nums[i])<=k)) {
+               return true;
+            }
+            else dict.put(nums[i],i);
+        }
+        return false;
+    }
+
+    //217. Contains Duplicate
+    //用stream直接一行返回
+    // return IntStream.of(nums).distinct().count() != nums.length;
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> dict=new HashSet<>();
+        for(int i:nums){
+            //dict.add(): 当不含有元素i时返回false；
+            if(!dict.add(i)) return true;
+           /* if(dict.contains(i)) return true;
+            dict.add(i);
+            */
+        }
+        return false;
+    }
+
+    //205. Isomorphic Strings
+    //注意s到t和t到s都应该有映射
+    public boolean isIsomorphic(String s, String t) {
+        if(s.length()!=t.length())return false;
+        HashMap<Character,Character> s2t=new HashMap<>();
+        HashMap<Character,Character> t2s=new HashMap<>();
+        for(int i=0;i<s.length();i++) {
+            char si=s.charAt(i);
+            char ti=t.charAt(i);
+            if((s2t.containsKey(si)&&s2t.get(si)!=ti)||(t2s.containsKey(ti)&&t2s.get(ti)!=si)){
+                return false;
+            }
+            s2t.put(si,ti);
+            t2s.put(ti,si);
+        }
+        return true;
+    }
+
+
+    //203. Remove Linked List Elements
+    public ListNode removeElementsRecur(ListNode head, int val) {
+        if (head==null) return null;
+        head.next=removeElementsRecur(head.next,val);
+        return head.val==val? head.next:head;
+    }
+    public ListNode removeElementsIterate(ListNode head, int val) {
+        ListNode ret=new ListNode();
+        ret.next=head;
+        ListNode pre=ret;
+        while (head!=null){
+            if(head.val==val){
+                pre.next=head.next;
+                head=pre.next;
+            }
+            else {
+            pre=pre.next;
+            head=pre.next;}
+        }
+        return ret.next;
     }
 
 
