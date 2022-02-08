@@ -113,6 +113,7 @@ class MyStack {
     }
 }
 
+
 public class topeasy {
     public static void main(String[] args){
         topeasy t=new topeasy();
@@ -122,24 +123,14 @@ public class topeasy {
         root.right.left=new TreeNode(15);
         root.right.right=new TreeNode(7);
         int[] nums=new int[]{0,1,2,4,5,7};
-        String pa="abba";
-        String s="dog cat cat dog";
+        String pa="aa";
+        String s = "baa";
 
-        System.out.println(t.wordPattern(pa,s));
+
+        System.out.println('A'-'a');
 
     }
-    public static class TreeNode {
-      int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode() {}
-      TreeNode(int val) { this.val = val; }
-      TreeNode(int val, TreeNode left, TreeNode right) {
-          this.val = val;
-          this.left = left;
-          this.right = right;
-     }
-  }
+
 
   //
   public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
@@ -150,13 +141,229 @@ public class topeasy {
         root1.val=root1.val+root2.val;
         return root1;
   }
+  //409. Longest Palindrome
+    //长度减去为奇数的字母数字加一
+  public int longestPalindrome(String s) {
+        int[] alphabet=new int[128];
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            alphabet[c]++;
+        }
+        int count=0;
+        for(int i:alphabet){
+            count += (i%2==1)? 1:0;
+        }
+        return s.length()-count+(count>0? 1:0);
+  }
+
+
+
+
+  //404. Sum of Left Leaves
+  public int sumOfLeftLeaves(TreeNode root) {
+        if(root==null) return 0;
+      int sumofleft=0;
+        if(root.left!=null&&root.left.left==null&&root.left.right==null){
+            sumofleft +=root.left.val;
+        }
+       sumofleft+= sumOfLeftLeaves(root.left);
+       sumofleft+= sumOfLeftLeaves(root.right);
+        return sumofleft;
+  }
+
+
+//392. Is Subsequence
+    public boolean isSubsequence(String s, String t) {
+        if(s.length()>t.length()) return false;
+        int i=0,j=0;
+        while(i<s.length()&& j<t.length()){
+            if(s.charAt(i)==t.charAt(j)){
+                i++;
+            }
+            j++;
+        }
+        return i==s.length();
+    }
+
+  //389. Find the Difference
+  public char findTheDifference(String s, String t) {
+        int cs=0;
+        int ct=0;
+        for(int i=0;i<s.length();i++){
+            cs +=s.charAt(i);
+        }
+        for (int i=0;i<t.length();i++){
+            ct +=t.charAt(i);
+        }
+        return (char)(ct-cs);
+  }
+  public char findTheDifferenceArray(String s, String t) {
+        int[] record=new int[26];
+        for(int i=0;i<s.length();i++){
+            record[s.charAt(i)-'a']++;
+        }
+        for(int i=0;i<t.length();i++){
+            record[t.charAt(i)-'a']--;
+            if(record[t.charAt(i)-'a']<0){
+                return t.charAt(i);
+            }
+        }
+        return ' ';
+  }
+  //387. First Unique Character in a String
+  public int firstUniqChar(String s) {
+        HashMap<Character,Integer> map=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            int count =map.getOrDefault(c,0)+1;
+            map.put(c,count);
+        }
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            if(map.get(c)==1) return i;
+        }
+        return -1;
+  }
+
+  //383. Ransom Note
+  public boolean canConstructArray(String ransomNote, String magazine) {
+        int[] dict=new int[26];
+        for(int i=0;i<magazine.length();i++){
+            int index=magazine.charAt(i)-'a';
+            dict[index]++;
+        }
+        for(int i=0;i<ransomNote.length();i++){
+            int index=ransomNote.charAt(i)-'a';
+            dict[index]--;
+        }
+        for(int i:dict){
+            if(i<0) return false;
+        }
+        return true;
+  }
+  public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character,Integer> mag=new HashMap<>();
+        for(int i=0;i<magazine.length();i++){
+            char c=magazine.charAt(i);
+            int count=mag.getOrDefault(c,0)+1;
+            mag.put(c,count);
+        }
+        for(int i=0;i<ransomNote.length();i++){
+            char c=ransomNote.charAt(i);
+            if(!mag.containsKey(c)) {
+                return false;
+            }else {
+                int count=mag.get(c)-1;
+                if(count==0){
+                    mag.remove(c);
+                }else {
+                    mag.put(c,count);
+                }
+            }
+        }
+        return true;
+  }
+
+  //367. Valid Perfect Square
+    //二分查找
+  public boolean isPerfectSquare(int num) {
+        if (num==1) return true;
+        int half=num/2;
+        for(int i=1;i<=half;i++){
+            int sqrt=i*i;
+            if(sqrt==num) return true;
+            if(sqrt>num) return false;
+        }
+        return false;
+  }
+
+
+  //349. Intersection of Two Arrays
+  public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> n1=new HashSet<>();
+        HashSet<Integer> inter=new HashSet<>();
+        for(int i:nums1){
+            n1.add(i);
+        }
+        for(int i:nums2){
+            if(n1.contains(i)){
+                inter.add(i);
+            }
+        }
+        int[] ret=new int[inter.size()];
+        int j=0;
+        for(int i: inter){
+            ret[j]=i;
+            j++;
+        }
+return ret;
+  }
+
+  //345. Reverse Vowels of a String
+  public String reverseVowels(String s) {
+        HashSet<Character> vowels=new HashSet<>(){{
+            add('a');
+            add('e');
+            add('i');
+            add('o');
+            add('u');
+            add('A');
+            add('E');
+            add('I');
+            add('O');
+            add('U');
+        }};
+        char[] reverse=s.toCharArray();
+        int i=0,j=reverse.length-1;
+        while(i<j){
+            char t1=reverse[i];
+            char t2=reverse[j];
+            // return "aeiouAEIOU".indexOf(ch) >= 0;
+            while(i<j&&!vowels.contains(t1)){
+                i++;
+                t1=reverse[i];
+            }
+            while(i<j&&!vowels.contains(t2)){
+                j--;
+                t2=reverse[j];
+            }
+            char temp=reverse[i];
+            reverse[i]=reverse[j];
+            reverse[j]=temp;
+            i++;
+            j--;
+        }
+        String ret="";
+        for( char c:reverse){
+            ret = ret+c;
+        }
+        return ret;
+  }
+
+  //344. Reverse String
+  public void reverseString(char[] s) {
+        for(int i=0,j=s.length-1;i<j;i++,j--){
+            char temp=s[j];
+            s[j]=s[i];
+            s[i]=temp;
+        }
+  }
+
+
+  //326. Power of Three
+    // return n > 0 && 1162261467 % n == 0; 一行解决，3^19为32位有符号整数范围内3的最大幂
+  public boolean isPowerOfThree(int n) {
+        while (n!=0&&n%3==0){
+            n=n/3;
+        }
+        return n==1;
+  }
 
   //234. Palindrome Linked List
     //也可以用快慢指针，快指针到队尾时慢指针在最中间,然后用后半部分反转进行比较
   public boolean isPalindrome(ListNode head) {
         if (head==null) return true;
         List<Integer> list=new ArrayList<>();
-
         while (head!=null){
             list.add(head.val);
             head=head.next;
@@ -310,6 +517,26 @@ public class topeasy {
             }
         }
         return ancestor;
+  }
+
+  //412. Fizz Buzz
+  public List<String> fizzBuzz(int n) {
+      List<String> fb=new ArrayList<>();
+      for(int i=1;i<=n;i++){
+          if(i%3==0&&i%5==0){
+              fb.add("FizzBuzz");
+          }
+          else if(i%3==0){
+              fb.add("Fizz");
+          }
+          else if(i%5==0){
+              fb.add("Buzz");
+          }
+          else {
+              fb.add(Integer.toString(i));
+          }
+      }
+      return fb;
   }
 
 
