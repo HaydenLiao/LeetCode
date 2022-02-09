@@ -519,6 +519,107 @@ return ret;
         return ancestor;
   }
 
+  //453. Minimum Moves to Equal Array Elements
+  public int minMoves(int[] nums) {
+      int min=nums[0];
+      for(int i:nums){
+          if(i<min) min=i;
+      }
+      int move=0;
+      for(int i:nums){
+          move=move+ i-min;
+      }
+      return move;
+  }
+
+
+  //441. Arranging Coins
+    public int arrangeCoins(int n) {
+      int count=0;
+      int i=1;
+      while(n>=i){
+          n=n-i;
+          count++;
+          i++;
+      }
+      return count;
+    }
+
+  //434. Number of Segments in a String
+  public int countSegmentsTwopoints(String s) {
+      int count=0;
+      for(int i=0;i<s.length();i++){
+          if(s.charAt(i)!=' '&&(i==0||s.charAt(i-1)==' ')){
+              count++;
+          }
+      }
+      return count;
+  }
+  public int countSegments(String s) {
+      int res=0;
+      String[] segments=s.split(" ");
+      for(String i:segments){
+          if(!i.equals("")){
+              res++;
+          }
+      }
+      return res;
+  }
+
+  //415. Add Strings
+  public String addStrings(String num1, String num2) {
+      StringBuilder res=new StringBuilder();
+      int i=num1.length()-1;
+      int j=num2.length()-1;
+      int carry=0;
+      while(i>=0||j>=0){
+          int n1= i>=0? num1.charAt(i)-'0' :0;
+          int n2= j>=0? num2.charAt(j)-'0' :0;
+          int temp=n1+n2+carry;
+          carry=temp/10;
+          res.append(temp%10);
+          i--;
+          j--;
+      }
+      if(carry==1){
+          res.append(1);
+      }
+      return res.reverse().toString();
+  }
+
+
+  //414. Third Maximum Number
+  public int thirdMaxSet(int[] nums) {
+      TreeSet<Integer> s=new TreeSet<>();
+      for(int i:nums){
+          s.add(i);
+          if(s.size()>3){
+              s.remove(s.first());
+          }
+      }
+      return s.size()<3? s.last() : s.first();
+  }
+
+  public int thirdMax(int[] nums) {
+      Arrays.sort(nums);
+      int thirdMax=nums[nums.length-1];
+      int count=1;
+      for(int i=nums.length-1;i>=0;i--){
+          if(nums[i]<thirdMax){
+              count++;
+              thirdMax=nums[i];
+          }
+          if(count==3){
+              break;
+          }
+      }
+      if(count==3){
+          return thirdMax;
+      }else {
+          return nums[nums.length-1];
+      }
+  }
+
   //412. Fizz Buzz
   public List<String> fizzBuzz(int n) {
       List<String> fb=new ArrayList<>();
