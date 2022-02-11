@@ -127,7 +127,7 @@ public class topeasy {
         String s = "baa";
 
 
-        System.out.println('A'-'a');
+        System.out.println(s.substring(0,3));
 
     }
 
@@ -517,6 +517,62 @@ return ret;
             }
         }
         return ancestor;
+  }
+
+  //463. Island Perimeter
+    //https://leetcode-cn.com/problems/island-perimeter/solution/tu-jie-jian-ji-er-qiao-miao-de-dfs-fang-fa-java-by/
+    //DFS
+  public int islandPerimeter(int[][] grid) {
+
+      return 0;
+
+  }
+
+  //482. License Key Formatting
+  public String licenseKeyFormatting(String s, int k) {
+      StringBuilder res=new StringBuilder();
+      int count=0;
+      for(int i=s.length()-1;i>=0;i--){
+          if(s.charAt(i)!='-'){
+              res.append(Character.toUpperCase(s.charAt(i)));
+              count++;
+          }
+          if(count==k){
+              res.append('-');
+              count=0;
+          }
+      }
+      if(res.length()>0&&res.charAt(res.length()-1)=='-'){
+          res.deleteCharAt(res.length()-1);
+      }
+      return res.reverse().toString();
+  }
+
+
+
+
+  //459. Repeated Substring Pattern
+    //https://leetcode-cn.com/problems/repeated-substring-pattern/solution/jian-dan-ming-liao-guan-yu-javaliang-xing-dai-ma-s/
+  public boolean repeatedSubstringPattern(String s) {
+      String temp=s+s;
+      return temp.substring(1,temp.length()-1).contains(s);
+  }
+
+  //455. Assign Cookies
+  public int findContentChildren(int[] g, int[] s) {
+      Arrays.sort(g);
+      Arrays.sort(s);
+      int count=0;
+      int i=0;
+      int j=0;
+      while(j<s.length&&i<g.length){
+          if(g[i]<=s[j]){
+             i++;
+             count ++;
+          }
+          j++;
+      }
+      return count;
   }
 
   //453. Minimum Moves to Equal Array Elements
