@@ -2,9 +2,9 @@ package interview;
 
 import java.util.HashMap;
 
-public class code {
+public class Code {
     public static void main(String[] args){
-        code c=new code();
+        Code c=new Code();
 
     }
     public  int firstUniqueChar(String s){

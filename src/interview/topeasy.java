@@ -122,12 +122,14 @@ public class topeasy {
         root.right=new TreeNode(20);
         root.right.left=new TreeNode(15);
         root.right.right=new TreeNode(7);
-        int[] nums=new int[]{0,1,2,4,5,7};
+        int[] nums1=new int[]{4,1,2};
+        int[] nums2=new int[]{1,3,4,2};
+        int[] greater=t.nextGreaterElement(nums1,nums2);
         String pa="aa";
         String s = "baa";
 
 
-        System.out.println(s.substring(0,3));
+        System.out.println(15/4);
 
     }
 
@@ -210,6 +212,46 @@ public class topeasy {
         }
         return ' ';
   }
+
+  //492. Construct the Rectangle
+  public int[] constructRectangle(int area) {
+        int w=(int)Math.sqrt(area);
+        while(area % w !=0){
+            w--;
+        }
+        return new int[]{area/w,w};
+  }
+
+  //496. Next Greater Element I
+  public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] res=new int[nums1.length];
+        HashMap<Integer,Integer> store=new HashMap<>();
+        for(int i=0;i<nums2.length;i++){
+            store.put(nums2[i],i);
+        }
+        for(int i=0;i<nums1.length;i++){
+            int index=store.get(nums1[i]);
+            int j=index+1;
+            if(j==nums2.length){
+                res[i]=-1;
+            }else {
+                for(;j<nums2.length;j++){
+                    if(nums2[j]>nums1[i]){
+                        res[i]=nums2[j];
+                        break;
+                    }else if(j==nums2.length-1&&nums2[j]<=nums1[i]){
+                        res[i]=-1;
+                    }
+                }
+            }
+        }
+        return res;
+  }
+
+
+
+
+
   //387. First Unique Character in a String
   public int firstUniqChar(String s) {
         HashMap<Character,Integer> map=new HashMap<>();
@@ -527,6 +569,21 @@ return ret;
       return 0;
 
   }
+  //485. Max Consecutive Ones
+  public int findMaxConsecutiveOnes(int[] nums) {
+      int maxOne=0;
+      int temMax=0;
+      for(int i:nums){
+          if(i==1){
+              temMax++;
+          }else if(i==0){
+              maxOne= maxOne>temMax? maxOne: temMax;
+              temMax=0;
+          }
+      }
+      return Math.max(maxOne,temMax);
+  }
+
 
   //482. License Key Formatting
   public String licenseKeyFormatting(String s, int k) {

@@ -1,0 +1,37 @@
+Morgan Stanley:
+1.给一个字符串，返回第一个没有重复的字母
+2.reverse linkedlist
+
+设计一个student class
+属性String :name
+    Long:GPA
+method: 给定两个student list, 返回一个list为合并的student
+问：两个list中都有name和GPA相同的的object，他们是相同的object吗？
+    不相同，内存地址不一样，为不同的objects
+
+问：合并的student list会同时出现这两个objects还是只有一个？
+   两个都有
+
+问：要是只想要一个，怎么做？
+   command+N :constructor
+   override equals
+
+
+Amazon:
+1.加密钥匙：
+给定一个list<Integer> nums
+每次将每个integer的最右一位与前一位相加，直到最后为两位数时返回string
+eg： 5   8   3   2
+      13  11   5       只取13的3 与11 的1
+        4     5        返回"45"
+
+
+2.额外的运费：
+有一个list<Integer> parcels 以及int k, 其中Integer为每个包裹所需要的运费，k为可以承载的包裹的数量，k>=parcels.len
+其他所有包裹运费为1～∞，求装满k个包裹所需要的额外运费
+eg: parcels:[7,3,5,1,4]
+    k:9
+    所有包裹运费分别为[1,2,3,4,5...]
+    则，除了parcels以外加进去最小运费的包裹为：
+    [2,6,8,9]
+    所以最小运费为2+6+8+9
