@@ -222,6 +222,31 @@ public class topeasy {
         return new int[]{area/w,w};
   }
 
+  //500. Keyboard Row
+  public String[] findWords(String[] words) {
+        final String[] ss=new String[]{"qwertyuiop","asdfghjkl","zxcvbnm"};
+        final int[] map=new int[26];
+        for(int i=0;i<ss.length;i++){
+            for(char c:ss[i].toCharArray()){
+                map[c-'a']=i;
+            }
+        }
+        List<String> ret=new ArrayList<>();
+        outer: for(String w:words){
+            int flag=-1;
+             for(char c:w.toCharArray()){
+             c=Character.toLowerCase(c);
+             if(flag==-1){
+                 flag=map[c-'a'];
+             }else if(map[c-'a']!=flag){
+                 continue outer;
+             }
+            }
+             ret.add(w);
+        }
+        return ret.toArray(ret.toArray(new String[ret.size()]));
+  }
+
   //496. Next Greater Element I
   public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int[] res=new int[nums1.length];
